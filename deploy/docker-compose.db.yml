@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+
+  parrot-app:
+    depends_on:
+      - "parrot-database"
+
+  parrot-database:
+    image: hub.zxz.su/common/doci/postgres:12.3-05045d0f
+    restart: unless-stopped
+    container_name: parrot-database
+    environment:
+      - POSTGRES_USER=parrot
+      - POSTGRES_PASSWORD=parrot
+    ports:
+      - "5432"
+    volumes:
+      - "${PARROT_DB_VOLUME:-db-volume}:/var/lib/postgresql/data"
+
+volumes:
+  db-volume:

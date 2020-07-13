@@ -1,0 +1,31 @@
+FROM python:3.8
+
+# Disables the buffer for instant output of messages to stdout from processes.
+ENV PYTHONUNBUFFERED=1
+
+# Install system requires
+RUN apt-get update && \
+    apt-get install -y libpq-dev wait-for-it && \
+    apt-get clean
+
+## Install poetry
+RUN pip install \
+    --no-cache-dir \
+    -i https://nexus.zxz.su/repository/g.uma_media.platform/simple/ \
+    poetry==1.0.5
+
+WORKDIR /app/src
+
+COPY pyproject.toml poetry.lock /app/src/
+
+## Install app requires
+RUN poetry config virtualenvs.create false && \
+    poetry install --no-interaction --no-ansi
+
+COPY ./ /app/src
+
+# Build static
+RUN /app/src/manage.py collectstatic --noinput
+
+# Move scripts to /app
+RUN find ./ -iname '*.sh' -exec mv '{}' /app/ \;

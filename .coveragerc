@@ -1,0 +1,19 @@
+[run]
+data_file = /tmp/.coverage
+branch = True
+omit =
+    */manage.py
+    */test*.py
+    */migrations/*
+    */__init__.py
+    */asgi.py
+    */vendors/*
+    */site-packages/*
+    */.local/*
+    */tests/*
+    conftest.py
+    */admin.py
+    */urls.py
+
+[report]
+precision = 2

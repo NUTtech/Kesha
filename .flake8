@@ -1,0 +1,90 @@
+[flake8]
+max-complexity = 6
+min-coverage-percents = 80
+
+ignore =
+  ; Found `f` string
+  WPS305,
+  ; Missing docstring in public module
+  D100,
+  ; Found class without a base class
+  WPS306,
+  ; Missing docstring in public nested class
+  D106,
+  ; Found `__init__.py` module with logic
+  WPS412,
+  ; Found implicit string concatenation
+  WPS326,
+  ; Found string constant over-use
+  WPS226,
+  ; Found upper-case constant in a class
+  WPS115,
+
+per-file-ignores =
+  ; all tests
+  test_*.py,tests.py,tests_*.py,*/tests/*:
+  ; Use of assert detected
+  S101,
+  ; ignore type annotations coverage
+  TAE001,
+  ; Missing docstring in public package
+  D104,
+  ; Found protected attribute usage
+  WPS437,
+  ; Found too many local variables
+  WPS210,
+  ; Found magic number
+  WPS432,
+  ; Found too many arguments
+  WPS211,
+  ; Found too many `assert` statements
+  WPS218,
+
+  ; all init files
+  __init__.py:
+  ; ignore not used imports
+  F401,
+  ; ignore import with wildcard
+  F403,
+
+  ; conftest file
+  conftest.py:
+  ; Found protected module import
+  WPS436,
+  ; isort found an import in the wrong position
+  I001,
+  ; isort found an unexpected blank line in imports
+  I004,
+  ; unable to detect undefined names
+  F403,
+  ; imported but unused
+  F401,
+  ; Found vague import that may cause confusion
+  WPS347,
+  ; Found wrong magic comment
+  WPS400,
+
+  ; all models
+  models.py:
+  ; too few type annotations
+  TAE001,
+  ; Found magic number
+  WPS432
+
+exclude =
+  ./.git,
+  ./venv,
+  ./cached_venv,
+  ./frontend,
+  ./static,
+  ./static_build,
+  ./deploy,
+  ./var,
+  ./templates,
+  *migrations*,
+  manage.py,
+  settings.py,
+
+application-import-names =
+  http_stubs,
+  parrot,
