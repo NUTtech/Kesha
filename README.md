@@ -1,6 +1,8 @@
 # Parrot
 _Web-service for testing http-requests and webhooks._
 
+[![codecov](https://codecov.io/gh/Uma-Tech/parrot/branch/develop/graph/badge.svg)](https://codecov.io/gh/Uma-Tech/parrot)
+![autotests](https://github.com/Uma-Tech/parrot/workflows/autotests/badge.svg)
 [![Python Version](https://img.shields.io/static/v1?label=python&message=3.8&color=blue)]()
 [![License](https://img.shields.io/static/v1?label=license&message=Apache+2&color=blue)]()
 
