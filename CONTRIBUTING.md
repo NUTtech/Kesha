@@ -101,3 +101,6 @@ git flow init
     ```shell script
     git push origin master develop --follow-tags
     ```
+
+1. [Создаём](https://github.com/Uma-Tech/parrot/releases/new)
+ новый релиз, указав запушенный тег

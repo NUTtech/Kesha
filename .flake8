@@ -74,6 +74,7 @@ per-file-ignores =
 exclude =
   ./.git,
   ./venv,
+  ./.venv,
   ./cached_venv,
   ./frontend,
   ./static,

@@ -6,7 +6,7 @@ x-default-env: &default-env
 
 x-service-base: &service-base
   <<: *default-env
-  image: parrot-app:latest
+  image: umahighload/parrot-app:latest
   restart: unless-stopped
 
 services:

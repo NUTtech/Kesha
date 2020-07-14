@@ -9,10 +9,7 @@ RUN apt-get update && \
     apt-get clean
 
 ## Install poetry
-RUN pip install \
-    --no-cache-dir \
-    -i https://nexus.zxz.su/repository/g.uma_media.platform/simple/ \
-    poetry==1.0.5
+RUN pip install --no-cache-dir poetry==1.0.9
 
 WORKDIR /app/src
 
