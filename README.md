@@ -13,6 +13,11 @@ _Web-service for testing http-requests and webhooks._
 </p>
 
 ## Quickstart
+1. Clone the repo
+    ```shell script
+    git clone git@github.com:Uma-Tech/parrot.git
+    ```
+
 1. Build
     ```shell script
     make build
@@ -33,7 +38,6 @@ _Web-service for testing http-requests and webhooks._
     ```
 
 1. Service will be available at `http://127.0.0.1:8042/`
-
 
 ## System requires
 * docker ([https://www.docker.com/](https://www.docker.com/))
