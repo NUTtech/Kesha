@@ -3,8 +3,10 @@ _Web-service for testing http-requests and webhooks._
 
 [![codecov](https://codecov.io/gh/Uma-Tech/parrot/branch/develop/graph/badge.svg)](https://codecov.io/gh/Uma-Tech/parrot)
 ![autotests](https://github.com/Uma-Tech/parrot/workflows/autotests/badge.svg)
-[![Python Version](https://img.shields.io/static/v1?label=python&message=3.8&color=blue)]()
-[![License](https://img.shields.io/static/v1?label=license&message=Apache+2&color=blue)]()
+![build](https://github.com/Uma-Tech/parrot/workflows/build/badge.svg)
+[![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/umahighload/parrot-app/latest)](https://registry.hub.docker.com/r/umahighload/parrot-app)
+![Python Version](https://img.shields.io/static/v1?label=python&message=3.8&color=blue)
+![License](https://img.shields.io/static/v1?label=license&message=Apache+2&color=blue)
 
 ---
 
@@ -12,15 +14,25 @@ _Web-service for testing http-requests and webhooks._
     <img src="https://github.com/Uma-Tech/parrot/raw/master/static/parrot_icon.png">
 </p>
 
+## Links:
+1. Repository: [https://github.com/Uma-Tech/parrot](https://github.com/Uma-Tech/parrot)
+1. Docker Hub: [https://registry.hub.docker.com/r/umahighload/parrot-app]((https://registry.hub.docker.com/r/umahighload/parrot-app))
+1. Issue tracker: [https://github.com/Uma-Tech/parrot/issues](https://github.com/Uma-Tech/parrot/issues)
+
 ## Quickstart
 1. Clone the repo
     ```shell script
     git clone git@github.com:Uma-Tech/parrot.git
     ```
 
-1. Build
+1. Build or download the docker image  
+    _for build_
     ```shell script
     make build
+    ```
+    _for download_
+    ```shell script
+    docker pull umahighload/parrot-app:latest
     ```
 
 1. Apply migrations and create a superuser:
