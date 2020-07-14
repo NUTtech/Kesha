@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   parrot-app-tests:
-    image: parrot-app:latest
+    image: umahighload/parrot-app:latest
     volumes:
       - ".:/app/src"
     command: bash /app/start-autotests.sh

@@ -1,0 +1,21 @@
+name: build
+
+on:
+  release:
+    types: [released]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.CI_DOCKER_HUB_USER }}
+        password: ${{ secrets.CI_DOCKER_HUB_TOKEN }}
+        repository: umahighload/parrot-app
+        tags: ${{ github.event.release.tag_name }}, latest
+        dockerfile: ./deploy/app/Dockerfile
