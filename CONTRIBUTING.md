@@ -60,47 +60,47 @@ This section is intended for maintainers only.
 If you are not a maintainer (or do not know what it means),
 just skip it. You are not going to miss anything useful.
 
-### Выпуск нового релиза:
-Релизы происходят по git-flow  
-[https://danielkummer.github.io/git-flow-cheatsheet/index.ru_RU.html](https://danielkummer.github.io/git-flow-cheatsheet/index.ru_RU.html)
+### Making new release
+Releases are shipped using git-flow
+[https://danielkummer.github.io/git-flow-cheatsheet/index.html](https://danielkummer.github.io/git-flow-cheatsheet/index.html)
 
-Необходимо выполнить только однажды для настройки git flow,
-все парамеры оставляем дефолтные:
+This command has to be run only once to set up git flow, keep default value
+for all parameters.
 ```shell script
 git flow init
 ```
 
-1. Обновляем ветки master и develop
+1. Update master and develop branches
     ```shell script
     git checkout develop && git pull
     git checkout master && git pull
     ```
    
-1. Запускаем новый релиз
+1. Start a new release
     ```shell script
     git flow release start <VERSION>
     ```
-    `<VERSION>` - Версия нового релиза
+    `<VERSION>` - new release version
 
-1. Обновляем версию проекта
+1. Update project version
     ```shell script
     poetry version <VERSION>
     ```
 
-1. Коммитим конфигурацию проекта с новой версией
+1. Commit project configuration with the new version
     ```shell script
     git commit -m "bump version" pyproject.toml
     ```
 
-1. Завершаем сборку релиза
+1. Finish building a release
     ```shell script
     git flow release finish <VERSION>
     ```
 
-1. Пушим всё в репозиторий
+1. Push all the changes into the repository
     ```shell script
     git push origin master develop --follow-tags
     ```
 
-1. [Создаём](https://github.com/Uma-Tech/parrot/releases/new)
- новый релиз, указав запушенный тег
+1. [Create](https://github.com/Uma-Tech/parrot/releases/new)
+ a new release specifying pushed tag

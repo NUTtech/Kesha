@@ -9,20 +9,19 @@ from http_stubs.models import HTTPStub, LogEntry
 
 
 class HTTPStubView(View):
-    """Отображение для обработки http заглушек.
+    """HTTP stub view.
 
-    Заглушки ищутся в базе данных, преставляют собой модели HTTPStub.
-    Если заглушка найдена, записывается событие в лог (LogEntry) и
-    в ответ подставляются параметры из заглушки.
-    Если заглушка не найдена, возвращается 404.
+    Searches for matching HTTPStub object in the database.
+    Creates a LogEntry and sends a response from the stub if stub is found.
+    Returns 404 if stub is not found.
     """
 
     def find_stub(self, method: str, path: str) -> Optional[HTTPStub]:
-        """Ищет подходящую http-заглушку.
+        """Search for matching http stub.
 
-        :param method: имя метода запроса
-        :param path: путь запроса
-        :returns: Подходящая заглушка или None
+        :param method: request method name
+        :param path: request path
+        :returns: matching stub or None
         """
         method = method.upper()
         stub = HTTPStub.objects.filter(
@@ -38,12 +37,12 @@ class HTTPStubView(View):
 
     @csrf_exempt
     def dispatch(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
-        """Обработать входящий реквест.
+        """Process incoming request.
 
-        :param request: входящий http запрос
-        :param args: парметры запроса
-        :param kwargs: именнованные аргументы запроса
-        :returns: ответ на http запрос
+        :param request: incoming http request
+        :param args: request args
+        :param kwargs: request kwargs
+        :returns: http response
         """
         stub = self.find_stub(request.method, f'/{kwargs["path"]}')
         if not stub:

@@ -95,7 +95,7 @@ STATICFILES_DIRS = [
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / Path('static_build')
 
-# настройки интерфейса админки
+# Admin UI settings
 SIMPLEUI_HOME_INFO = False
 SIMPLEUI_STATIC_OFFLINE = True
 SIMPLEUI_DEFAULT_THEME = 'layui.css'

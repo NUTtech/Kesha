@@ -8,7 +8,7 @@ from django.db.models import Lookup
 
 
 class HTTPMethod(Enum):
-    """Перечесление доступных http-методов."""
+    """Enumeration of the available HTTP methods."""
 
     GET = 'GET'
     POST = 'POST'
@@ -21,67 +21,67 @@ class HTTPMethod(Enum):
 
     @classmethod
     def names(cls) -> KeysView[str]:
-        """Множество доступных имён http-методов.
+        """Set of the available HTTP method names.
 
-        :returns: все имена вариантов перечисления
+        :returns: all names in the enumeration.
         """
         return cls.__members__.keys()
 
     @classmethod
     def slugs(cls) -> Iterator[Tuple[str, str]]:
-        """Имена методов для choices полей моделей.
+        """Names of the methods for the model choice fields.
 
-        :returns: итератор таплов имён http методов
+        :returns: iterator of tuples with http method names
         """
         return zip(cls.names(), cls.names())
 
 
 class HTTPStub(models.Model):
-    """HTTP заглушка."""
+    """HTTP stub."""
 
     is_active = models.BooleanField(
-        verbose_name='Включено',
+        verbose_name='Enabled',
         default=True,
     )
     path = models.CharField(
-        verbose_name='Путь запроса',
+        verbose_name='Request path',
         max_length=2000,
         db_index=True,
     )
     regex_path = models.BooleanField(
-        verbose_name='REGEX путь',
-        help_text='Путь представлен регулярным выражением',
+        verbose_name='REGEX path',
+        help_text='Path is a regular expression',
         default=False,
     )
     method = models.CharField(
-        verbose_name='Метод запроса',
+        verbose_name='Request method',
         max_length=10,
         db_index=True,
         choices=HTTPMethod.slugs(),
     )
     resp_delay = models.PositiveIntegerField(
-        verbose_name='Задержка перед ответом',
-        help_text='Задаётся в милисекундах',
+        verbose_name='Response delay',
+        help_text='In milliseconds',
         default=0,
     )
     resp_body = models.TextField(
-        verbose_name='Тело ответа',
+        verbose_name='Response body',
         default='[]',
         blank=True,
     )
     resp_status = models.IntegerField(
-        verbose_name='Статус ответа',
+        verbose_name='Response status',
         default=200,
         validators=(MinValueValidator(0), MaxValueValidator(600)),
     )
     resp_content_type = models.CharField(
-        verbose_name='Content-type ответа',
+        verbose_name='Response Content-Type',
         default='application/json',
         max_length=255,
     )
     resp_headers = HStoreField(
-        verbose_name='Заголовки ответа',
-        help_text='Заполняется в формате json',
+        verbose_name='Response headers',
+        help_text='In JSON format',
         default=dict,
         blank=True,
     )
@@ -96,41 +96,41 @@ class HTTPStub(models.Model):
         ]
 
     def __str__(self):
-        """Строковое представление модели.
+        """Return string representation of the model.
 
-        :returns: пример `get: /test/`.
+        :returns: e.g. `get: /test/`.
         """
         return f'{self.method}: {self.path}'
 
 
 class LogEntry(models.Model):
-    """Зпись лога."""
+    """Log entry."""
 
     path = models.URLField(
-        verbose_name='Полный путь запроса',
+        verbose_name='Full request path',
     )
     method = models.CharField(
-        verbose_name='Метод запроса',
+        verbose_name='Request method',
         max_length=10,
         choices=HTTPMethod.slugs(),
     )
     source_ip = models.GenericIPAddressField(
-        verbose_name='IP источника запроса',
+        verbose_name='Source IP',
     )
     date = models.DateTimeField(
-        verbose_name='Время запроса',
+        verbose_name='Request timestamp',
         auto_now_add=True,
         editable=False,
     )
     body = models.TextField(
-        verbose_name='Тело запроса',
+        verbose_name='Request body',
     )
     headers = HStoreField(
-        verbose_name='Заголовки запроса',
+        verbose_name='Request headers',
     )
     http_stub = models.ForeignKey(
         HTTPStub,
-        verbose_name='Связанная заглушка',
+        verbose_name='Related stub',
         related_name='logs',
         blank=True,
         on_delete=models.CASCADE,
@@ -141,19 +141,18 @@ class LogEntry(models.Model):
         verbose_name_plural = 'logs'
 
     def __str__(self) -> str:
-        """Cтроковое представление модели.
+        """Return string representation of the model.
 
-        :returns: возвращает пустую строку, чтобы убрать лишний вывод
-                  в некоторых местах админки.
+        :returns: empty string to make admin look cleaner
         """
         return ''
 
 
 @models.CharField.register_lookup
 class RegExpLookup(Lookup):
-    """Лукап для поиска регулярных выражений в базе.
+    """Regular expression field lookup.
 
-    Пример использования:
+    Here's an example of how to use it:
     ```
     HTTPStub.objects.filter(path__match='/path/to/target/')
     ```
@@ -162,11 +161,11 @@ class RegExpLookup(Lookup):
     lookup_name = 'match'
 
     def as_postgresql(self, compiler, connection) -> Tuple[str, list]:
-        """Компиляция запроса для postgres.
+        """Compiles request for postgres.
 
-        :param compiler: компилятор sql выражения
-        :param connection: подключение к базе
-        :return: сгенерированное выражение с параметрами
+        :param compiler: sql expression compiler
+        :param connection: database connection
+        :return: generated expression with params
         """
         lhs, lhs_params = self.process_lhs(compiler, connection)
         rhs, rhs_params = self.process_rhs(compiler, connection)

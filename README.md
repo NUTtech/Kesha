@@ -1,5 +1,5 @@
 # Parrot
-_Web-service for testing http-requests and webhooks._
+_Web-service for testing http requests and webhooks._
 
 [![codecov](https://codecov.io/gh/Uma-Tech/parrot/branch/develop/graph/badge.svg)](https://codecov.io/gh/Uma-Tech/parrot)
 ![autotests](https://github.com/Uma-Tech/parrot/workflows/autotests/badge.svg)

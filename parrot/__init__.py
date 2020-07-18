@@ -1,1 +1,1 @@
-"""Parrot - приложение для тестирования http-запросов/вебхуков."""
+"""Parrot - application for testing http requests and webhooks."""

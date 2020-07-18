@@ -7,15 +7,15 @@ from http_stubs.models import HTTPMethod, HTTPStub
 
 @pytest.fixture
 def http_stub_factory() -> Callable:
-    """Фабрика для создания объектов HTTPStub.
+    """HTTP stubs factory.
 
-    :returns: фвбрика-замыкание
+    :returns: factory closure
     """
     def factory(**kwargs) -> HTTPStub:
-        """Создать и вернуть объект HTTPStub.
+        """Create and return HTTPStub object.
 
-        :param kwargs: параметры для модели
-        :return: созданная заглушка
+        :param kwargs: model params
+        :return: created stub
         """
         default_params = {
             'path': '/default_path/',
