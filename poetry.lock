@@ -96,7 +96,7 @@ description = "A high-level Python Web framework that encourages rapid developme
 name = "django"
 optional = false
 python-versions = ">=3.6"
-version = "3.0.7"
+version = "3.0.8"
 
 [package.dependencies]
 asgiref = ">=3.2,<4.0"
@@ -800,7 +800,7 @@ pygments = ">=2.4,<3.0"
 typing_extensions = ">=3.6,<4.0"
 
 [metadata]
-content-hash = "f06e0c289846037c3f9abdb24c603620431cdc9256de99173cb1de34471fc377"
+content-hash = "4d4f2a69616daf6246515f3d616297a1fe2bc890f6f60569c5cacfe8dc158129"
 python-versions = "~3.8"
 
 [metadata.files]
@@ -870,8 +870,8 @@ darglint = [
     {file = "darglint-1.4.1.tar.gz", hash = "sha256:9147af9e6872e15209f67a70e6c7f16a821e516c0c06495fdb87e60ac0e5865a"},
 ]
 django = [
-    {file = "Django-3.0.7-py3-none-any.whl", hash = "sha256:e1630333248c9b3d4e38f02093a26f1e07b271ca896d73097457996e0fae12e8"},
-    {file = "Django-3.0.7.tar.gz", hash = "sha256:5052b34b34b3425233c682e0e11d658fd6efd587d11335a0203d827224ada8f2"},
+    {file = "Django-3.0.8-py3-none-any.whl", hash = "sha256:5457fc953ec560c5521b41fad9e6734a4668b7ba205832191bbdff40ec61073c"},
+    {file = "Django-3.0.8.tar.gz", hash = "sha256:31a5fbbea5fc71c99e288ec0b2f00302a0a92c44b13ede80b73a6a4d6d205582"},
 ]
 django-environ = [
     {file = "django-environ-0.4.5.tar.gz", hash = "sha256:6c9d87660142608f63ec7d5ce5564c49b603ea8ff25da595fd6098f6dc82afde"},
