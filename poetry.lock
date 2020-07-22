@@ -355,15 +355,15 @@ description = "Flake8 plugin for string formatting style."
 name = "flake8-use-fstring"
 optional = false
 python-versions = ">=3.6"
-version = "1.0"
+version = "1.1"
 
 [package.dependencies]
 flake8 = ">=3.0.0,<4.0.0"
 
 [package.extras]
-ci = ["pytest (>=4)", "pytest-cov (>=2)", "flake8-builtins", "flake8-commas", "flake8-fixme", "flake8-print", "flake8-quotes", "flake8-todo", "python-coveralls"]
-dev = ["pytest (>=4)", "pytest-cov (>=2)", "flake8-builtins", "flake8-commas", "flake8-fixme", "flake8-print", "flake8-quotes", "flake8-todo"]
-test = ["pytest (>=4)", "pytest-cov (>=2)", "flake8-builtins", "flake8-commas", "flake8-fixme", "flake8-print", "flake8-quotes", "flake8-todo"]
+ci = ["coverage (>=4.0.0,<5.0.0)", "pytest (>=4)", "pytest-cov (>=2)", "flake8-builtins", "flake8-commas", "flake8-fixme", "flake8-print", "flake8-quotes", "flake8-todo", "python-coveralls"]
+dev = ["coverage (>=4.0.0,<5.0.0)", "pytest (>=4)", "pytest-cov (>=2)", "flake8-builtins", "flake8-commas", "flake8-fixme", "flake8-print", "flake8-quotes", "flake8-todo"]
+test = ["coverage (>=4.0.0,<5.0.0)", "pytest (>=4)", "pytest-cov (>=2)", "flake8-builtins", "flake8-commas", "flake8-fixme", "flake8-print", "flake8-quotes", "flake8-todo"]
 
 [[package]]
 category = "dev"
@@ -802,7 +802,7 @@ pygments = ">=2.4,<3.0"
 typing_extensions = ">=3.6,<4.0"
 
 [metadata]
-content-hash = "00071acf7a141b2e726a4e3facb2d4b8a9239c56366a1c5311abc2417e9da92a"
+content-hash = "b20563504cf3f48dbeef054f3876049c713713b1e15abc968df52dd219c0601c"
 python-versions = "~3.8"
 
 [metadata.files]
@@ -953,7 +953,7 @@ flake8-type-annotations = [
     {file = "flake8_type_annotations-0.1.0-py3-none-any.whl", hash = "sha256:de64de5efef3277d7b6012e8618c37d35b21465fb16292e46e6eec5b87e47a8c"},
 ]
 flake8-use-fstring = [
-    {file = "flake8-use-fstring-1.0.tar.gz", hash = "sha256:ef676d70c71be29e0bf96c16f408b0a6bc53a00c2e72b7b3159117883d845ac1"},
+    {file = "flake8-use-fstring-1.1.tar.gz", hash = "sha256:a0eea849ffe33fb6903c210c243c0f418da86a530e46cb13e64f1bdb045f22dc"},
 ]
 freezegun = [
     {file = "freezegun-0.3.15-py2.py3-none-any.whl", hash = "sha256:82c757a05b7c7ca3e176bfebd7d6779fd9139c7cb4ef969c38a28d74deef89b2"},
