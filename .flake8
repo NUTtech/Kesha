@@ -19,6 +19,8 @@ ignore =
   WPS226,
   ; Found upper-case constant in a class
   WPS115,
+  ; f-string missing prefix
+  FS003,
 
 per-file-ignores =
   ; all tests
