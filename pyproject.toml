@@ -24,7 +24,7 @@ python = "~3.8"
 django = "~3.1"
 django-simpleui = "~2020.7"
 uvicorn = "~0.11.8"
-psycopg2 = "~2.8.5"
+psycopg2 = "~2.8.6"
 django-environ = "^0.4.5"
 
 [tool.poetry.dev-dependencies]
