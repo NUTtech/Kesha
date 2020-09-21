@@ -68,7 +68,7 @@ db.sqlite3
 db.sqlite3-journal
 
 # Sphinx documentation
-mdbook/_build/
+docs/_build/
 
 # IPython
 profile_default/
