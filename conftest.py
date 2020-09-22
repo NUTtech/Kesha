@@ -5,11 +5,11 @@ from _pytest.fixtures import FixtureFunctionMarker
 
 @pytest.fixture(autouse=True)
 def db_connect(db: FixtureFunctionMarker):
-    """Автоматическое подключение к базе для каждого теста.
+    """Automatically runs on database connection for every test.
 
-    :param db: фикстура инициализирующая базу данных.
+    :param db: fixture for the database initialization
     """
 
 
-# подключаем файлы фикстур
+# Adds fixtures
 from http_stubs.tests.fixtures import *  # noqa

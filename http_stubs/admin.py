@@ -9,36 +9,36 @@ admin.site.site_header = 'Parrot Admin'
 
 
 class LogEntryMixin:
-    """Миксин для админки и инлайна логов.
+    """Admin mixin for inlining logs.
 
-    Запрещает добавлять новые логи и редактировать старые.
+    Forbids adding new and editing old log entries.
     """
 
     def get_readonly_fields(self, *args, **kwargs) -> list:
-        """Делаем все поля только для чтения.
+        """Mark all fields read-only.
 
-        Генерируем список из всех полей, чтобы добавленные в будущем
-        тоже сюда попали.
+        Generates list of all fields so that fields added in future would be
+        also added here.
 
-        :param args: опциональные аргументы
-        :param kwargs: опциональные именованные аргументы
-        :returns: Сгенерированный список.
+        :param args: optional args
+        :param kwargs: optional kwargs
+        :returns: list of fields.
         """
         return [field.name for field in self.model._meta.fields]  # noqa:WPS437
 
     def has_add_permission(self, *args, **kwargs) -> bool:
         """
-        Запрещаем добавление новых записей руками.
+        Forbids adding new entries.
 
-        :param args: опциональные аргументы
-        :param kwargs: опциональные именованные аргументы
+        :param args: optional args
+        :param kwargs: optional kwargs
         :returns: False
         """
         return False
 
 
 class LogEntryAdminInline(LogEntryMixin, admin.TabularInline):
-    """Инлайн логов для админки http заглушек."""
+    """Inline for the http stubs log entries."""
 
     model = models.LogEntry
     ordering = ('-date',)
@@ -46,7 +46,7 @@ class LogEntryAdminInline(LogEntryMixin, admin.TabularInline):
 
 @admin.register(models.LogEntry)
 class LogEntryAdmin(LogEntryMixin, admin.ModelAdmin):
-    """Админка логов."""
+    """Log entries admin."""
 
     list_display = ('pk', 'date', 'http_stub', 'source_ip')
 
@@ -55,33 +55,33 @@ class LogEntryAdmin(LogEntryMixin, admin.ModelAdmin):
 
 @admin.register(models.HTTPStub)
 class HTTPStubAdmin(admin.ModelAdmin):
-    """Админка http заглушки."""
+    """HTTP stub admin."""
 
     extra_buttons_style = 'background-color:#00b0ff;color:white'
 
     actions = ['enable_action', 'disable_action']
 
     def enable_action(self, request: HttpRequest, queryset: QuerySet):
-        """Экшн включающий выбранные заглушки.
+        """Enable selected stubs.
 
-        :param request: http запрос
-        :param queryset: кверисет выбранных объектов
+        :param request: http request
+        :param queryset: queryset of the selected objects
         """
         queryset.update(is_active=True)
 
-    enable_action.short_description = ' Включить'
+    enable_action.short_description = ' Enable'
     enable_action.icon = 'fas fa-toggle-on'
     enable_action.style = extra_buttons_style
 
     def disable_action(self, request: HttpRequest, queryset: QuerySet):
-        """Экшн выключающий выбранные заглушки.
+        """Disable selected stubs.
 
-        :param request: http запрос
-        :param queryset: кверисет выбранных объектов
+        :param request: http request
+        :param queryset: queryset of the selected objects
         """
         queryset.update(is_active=False)
 
-    disable_action.short_description = ' Выключить'
+    disable_action.short_description = ' Disable'
     disable_action.icon = 'fas fa-toggle-off'
     disable_action.style = extra_buttons_style
 

@@ -7,16 +7,16 @@ from http_stubs.models import HTTPMethod, LogEntry
 
 
 class TestHTTPStubView:
-    """Тестирование отображения http-заглушек."""
+    """Tests representation of the http stubs."""
 
     @pytest.mark.parametrize('method', HTTPMethod.names())
     def test_nonexistent_stub(self, method: str, client):
-        """Тест ответа, при ненайденной заглушке.
+        """Tests response when stub is not found.
 
-        В ответ должен приходить код 404.
+        404 error should be returned.
 
-        :param method: имя http метода
-        :param client: фикстура http клиента
+        :param method: http method name
+        :param client: http client fixture
         """
         response = getattr(client, method.lower())('/nonexistent_stub')
 
@@ -26,11 +26,11 @@ class TestHTTPStubView:
     def test_exist_not_regexp_stub(
         self, method: str, http_stub_factory, client,
     ):
-        """Тест ответа, при имеющийся в безе не regex заглуше.
+        """Tests response for non-regex stub.
 
-        :param method: имя http метода
-        :param http_stub_factory: фабрика создания объектов HTTPStub
-        :param client: фикстура http клиента
+        :param method: http method name
+        :param http_stub_factory: HTTPStub factory
+        :param client: http client fixture
         """
         http_stub_factory(method=method)
         response = getattr(client, method.lower())('/default_path/')
@@ -42,10 +42,10 @@ class TestHTTPStubView:
 
     @pytest.mark.freeze_time('2020-05-25')
     def test_write_log(self, http_stub_factory, client):
-        """Тестирует запись в лог запросов.
+        """Tests request logging.
 
-        :param http_stub_factory: фабрика создания объектов HTTPStub
-        :param client: фикстура http клиента
+        :param http_stub_factory: HTTPStub factory
+        :param client: http client fixture
         """
         content_type = 'text/plain'
         http_body = http_stub_factory(method=HTTPMethod.POST.name)
@@ -53,12 +53,12 @@ class TestHTTPStubView:
         log = LogEntry.objects.last()
 
         def _datefmt(date) -> str:  # noqa:WPS430
-            """Преобразует объект даты в строку.
+            """Converts date object to string.
 
-            Нужно для корректного сравнения datetime и FakeDateTime.
+            For comparing datetime and FakeDateTime.
 
-            :param date: объект даты для преобразования
-            :returns: строка после применения шаблона
+            :param date: date object
+            :returns: string representation of the input date
             """
             return date.strftime('%d%m%y')  # noqa:WPS323
 
@@ -76,11 +76,11 @@ class TestHTTPStubView:
 
     @pytest.mark.parametrize('method', HTTPMethod.names())
     def test_exist_regexp_stub(self, method: str, http_stub_factory, client):
-        """Тест ответа, при имеющийся в безе regex заглуше.
+        """Tests response for the regex stub.
 
-        :param method: имя http метода
-        :param http_stub_factory: фабрика создания объектов HTTPStub
-        :param client: фикстура http клиента
+        :param method: http method name
+        :param http_stub_factory: HTTPStub factory
+        :param client: http client fixture
         """
         resp_body = 'Test Body'
         resp_status = 244
@@ -133,13 +133,13 @@ class TestHTTPStubView:
     def test_regexp_matching(
         self, regexp, path, status_code, client, http_stub_factory,
     ):
-        """Проверяет корректность матчинга регулярок.
+        """Tests correctness of the regex matching.
 
-        :param regexp: регулярное выражение
-        :param path: путь запроса
-        :param status_code: ожидаемый статус ответа
-        :param client: фикструра http-клиента
-        :param http_stub_factory: фабрика http-заглушек
+        :param regexp: regular expression
+        :param path: request path
+        :param status_code: expected response status code
+        :param client: http client fixture
+        :param http_stub_factory: HTTPStub factory
         """
         http_stub_factory(path=regexp, regex_path=True)
         response = client.get(path)

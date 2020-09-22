@@ -1,6 +1,6 @@
-"""Приложение для http заглушек, аля webhook.site.
+"""Application for testing and debugging http requests.
 
-Позволяет сконфигурировать свой урл и данные которые должны вернуться.
+Allows setting up custom urls returning predefined responses.
 """
 
 default_app_config = 'http_stubs.apps.HttpStubsConfig'

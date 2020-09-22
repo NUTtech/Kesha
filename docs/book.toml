@@ -1,0 +1,9 @@
+[book]
+authors = ["lowit"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Parrot"
+
+[output.html]
+theme = "src/theme"
