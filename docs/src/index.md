@@ -20,7 +20,7 @@ _Web-service for testing http requests and webhooks._
 1. Changelog: [https://github.com/Uma-Tech/parrot/blob/develop/CHANGELOG.md](https://github.com/Uma-Tech/parrot/blob/develop/CHANGELOG.md)
 
 ## Components
-1. Database postgres.
+1. Postgres database.
 1. Python-app based on Django Web Framework.
 
 ## Screenshots

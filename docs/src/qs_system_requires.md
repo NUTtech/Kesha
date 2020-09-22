@@ -1,4 +1,4 @@
-# System requires
+# System requirements
 
 * docker ([https://www.docker.com/](https://www.docker.com/))
 * docker-compose

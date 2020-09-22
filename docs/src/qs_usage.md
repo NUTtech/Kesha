@@ -1,6 +1,6 @@
 # Usage
 
-## First step - Create a http-stub
+## First step - Create an http-stub
 
 1. Go to `HTTP Stubs` -> `Stubs`
     ![](./images/03.jpg)
