@@ -81,6 +81,8 @@ git flow init
     git flow release start <VERSION>
     ```
     `<VERSION>` - new release version
+    
+1. Update CHANGELOG.md
 
 1. Update project version
     ```shell script
