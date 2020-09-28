@@ -122,7 +122,7 @@ description = "django admin theme 后台模板"
 name = "django-simpleui"
 optional = false
 python-versions = "*"
-version = "2020.9"
+version = "2020.9.26"
 
 [package.dependencies]
 django = "*"
@@ -882,7 +882,7 @@ django-environ = [
     {file = "django_environ-0.4.5-py2.py3-none-any.whl", hash = "sha256:c57b3c11ec1f319d9474e3e5a79134f40174b17c7cc024bbb2fad84646b120c4"},
 ]
 django-simpleui = [
-    {file = "django-simpleui-2020.9.tar.gz", hash = "sha256:d73695adea39b4d1fba321a3f24d75707a54bf1e7e97d69a94109b83bc7e0991"},
+    {file = "django-simpleui-2020.9.26.tar.gz", hash = "sha256:a41ebe4696f108dc68de4b44211f2141a4e0d3bd63207e39cf4654c3b73e4732"},
 ]
 docutils = [
     {file = "docutils-0.16-py2.py3-none-any.whl", hash = "sha256:0c5b78adfbf7762415433f5515cd5c9e762339e23369dbe8000d84a4bf4ab3af"},
