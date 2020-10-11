@@ -31,14 +31,7 @@
 
 </fieldset>
 
-<!--<script type="text/javascript" src="/static/admin/js/image_pro.js"></script>-->
-<!--<script type="text/javascript" src="/static/admin/js/imagePreview.js"></script>-->
 <script type="text/javascript">
-
-
-    /**
- * Created by hucf on 2019/11/20.
- */
 var ImagePreview = {
     default_params:{},
     init:function (param) {
@@ -128,7 +121,6 @@ var ImagePreview = {
         $("#ip-right").fadeIn();
     },
     fnAdjustMaxWidth:function () {
-        //最长边判定，避免超出屏幕画幅的展示
         var widthFlag = true;
         var max = $("#ip-img-preview").width();
         if (max < $("#ip-img-preview").height()) {
@@ -151,10 +143,10 @@ var ImagePreview = {
         e.preventDefault();
         var wheel = e.originalEvent.wheelDelta || -e.originalEvent.detail;
         var delta = Math.max(-1, Math.min(1, wheel));
-        if (delta < 0) { //向下滚动
+        if (delta < 0) {
             $(this).width($(this).width() / 1.1);
             $(this).height($(this).height() / 1.1);
-        } else { //向上滚动
+        } else {
             $(this).width($(this).width() * 1.1);
             $(this).height($(this).height() * 1.1);
         }
@@ -188,22 +180,16 @@ var ImagePreview = {
     var image_document = document.getElementsByTagName("a");
     for (var i = 0; i < image_document.length; i++) {
         let text_list = image_document[i].href.split('.')
-        {#console.log("text_list",text_list)#}
         let image_list = ["jpg", "png"]
         for (let j = 0; j <image_list.length ; j++) {
-            {#console.log("image_list[i]-====", image_list[j])#}
-            {#console.log("text_list[text_list.length-1]===",text_list[text_list.length-1])#}
             if (text_list[text_list.length-1] == image_list[j] )
             {
-                {#console.log("oho=====")#}
                 var herf = image_document[i].href
-                {#console.log(herf)#}
                 var image_html = image_document[i].outerHTML
                 image_document[i].outerHTML = '<div id="imgBox"><img style="width: 200px" id="img" src="' + herf + '"/></div>'
             }
         }
     }
-    // ImagePreview.init({id:"imgBox"});
     ImagePreview.init({id:$("#imgBox img")});
 
 
