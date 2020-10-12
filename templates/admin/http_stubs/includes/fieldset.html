@@ -1,5 +1,6 @@
 {% load utils %}
 <fieldset class="module aligned {{ fieldset.classes }}">
+<legend></legend>
     {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
     {% if fieldset.description %}
         <div class="description">{{ fieldset.description|safe }}</div>
@@ -18,7 +19,9 @@
                             <div class="readonly">{{ field.contents }}</div>
                         {% else %}
                             {{ field.field }}
+                            {# added request url for path field(issue #35) #}
                             {% if field.field.name == 'path' %}<div class="readonly"><div id="full-path">{% absolute field.field.value %}</div><div id="path-copied-alert">Скопировано!</div></div>{% endif %}
+                            {#  #}
                         {% endif %}
                     {% endif %}
                     {% if field.field.help_text %}
