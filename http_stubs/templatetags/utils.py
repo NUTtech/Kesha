@@ -5,5 +5,5 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True, name='absolute')
 def get_absolute_url_tag(context, url):
-    """Тег возвращающий абсолютный урл."""
+    """Tag that returns an absolute url."""
     return context.get('request').build_absolute_uri(url)
