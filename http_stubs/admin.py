@@ -8,11 +8,9 @@ admin.site.site_title = 'Parrot'
 admin.site.site_header = 'Parrot Admin'
 
 
-class LogEntryMixin:
-    """Admin mixin for inlining logs.
-
-    Forbids adding new and editing old log entries.
-    """
+@admin.register(models.LogEntry)
+class LogEntryAdmin(admin.ModelAdmin):
+    """Log entries admin."""
 
     def get_readonly_fields(self, *args, **kwargs) -> list:
         """Mark all fields read-only.
@@ -35,19 +33,6 @@ class LogEntryMixin:
         :returns: False
         """
         return False
-
-
-class LogEntryAdminInline(LogEntryMixin, admin.TabularInline):
-    """Inline for the http stubs log entries."""
-
-    model = models.LogEntry
-    ordering = ('-date',)
-    max_num = 3
-
-
-@admin.register(models.LogEntry)
-class LogEntryAdmin(LogEntryMixin, admin.ModelAdmin):
-    """Log entries admin."""
 
     list_display = ('pk', 'date', 'http_stub', 'source_ip')
 
@@ -89,5 +74,3 @@ class HTTPStubAdmin(admin.ModelAdmin):
     list_display = ('pk', 'is_active', 'method', 'path')
 
     list_filter = ('is_active', 'path', 'method', 'resp_status')
-
-    inlines = (LogEntryAdminInline,)
