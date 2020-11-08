@@ -42,6 +42,7 @@ class LogEntryAdminInline(LogEntryMixin, admin.TabularInline):
 
     model = models.LogEntry
     ordering = ('-date',)
+    max_num = 3
 
 
 @admin.register(models.LogEntry)
