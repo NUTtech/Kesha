@@ -1,6 +1,9 @@
 # Version history
 We follow [Semantic Versions](https://semver.org/).
 
+## 0.1.5
+- Add PARROT_ALLOWED_HOSTS env var [#63](https://github.com/Uma-Tech/parrot/pull/63)
+
 ## 0.1.4
 - Remove inline logs from http-stub page [#58](https://github.com/Uma-Tech/parrot/pull/58)
 
