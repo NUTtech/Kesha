@@ -9,7 +9,7 @@ SECRET_KEY = '^c!x7!qejlut8=d3=mls9c%u-+(8t#&cfap5#=w%10t@&*b4=6'
 
 DEBUG = env.bool('DEBUG', False)
 
-ALLOWED_HOSTS = ['127.0.0.1', 'parrotworker']
+ALLOWED_HOSTS = env.list('PARROT_ALLOWED_HOSTS', default=['127.0.0.1'])
 
 INSTALLED_APPS = [
     'simpleui',
