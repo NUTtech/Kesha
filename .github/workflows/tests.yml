@@ -40,7 +40,7 @@ jobs:
     - name: Run autotests
       env:
         PARROT_DB_HOST: postgres
-        SECRET_KEY: secret
+        PARROT_SECRET_KEY: secret
       run: |
         poetry run pytest --cov=./ --cov-report=xml
 

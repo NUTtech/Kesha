@@ -5,7 +5,7 @@ env = environ.Env()
 
 BASE_DIR = Path(__file__).parent.parent
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env('PARROT_SECRET_KEY')
 
 DEBUG = env.bool('DEBUG', False)
 
