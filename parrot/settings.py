@@ -4,6 +4,7 @@ from pathlib import Path
 env = environ.Env()
 
 BASE_DIR = Path(__file__).parent.parent
+environ.Env.read_env(str(BASE_DIR / '.env'))
 
 SECRET_KEY = env('PARROT_SECRET_KEY')
 
