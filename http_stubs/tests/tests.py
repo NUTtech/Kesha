@@ -48,8 +48,15 @@ class TestHTTPStubView:
         :param client: http client fixture
         """
         content_type = 'text/plain'
-        http_body = http_stub_factory(method=HTTPMethod.POST.name)
-        client.post('/default_path/', 'test', content_type=content_type)
+        http_body = http_stub_factory(
+            method=HTTPMethod.POST.name,
+            path='/regex/.*',
+            regex_path=True,
+        )
+
+        request_path = f'/regex/?query={"search" * 300}'
+
+        client.post(request_path, 'test', content_type=content_type)
         log = LogEntry.objects.last()
 
         def _datefmt(date) -> str:  # noqa:WPS430
@@ -72,7 +79,7 @@ class TestHTTPStubView:
         assert log.body == 'test'
         assert log.http_stub == http_body
         assert log.method == HTTPMethod.POST.name
-        assert log.path == 'http://testserver/default_path/'
+        assert log.path == f'http://testserver{request_path}'
 
     @pytest.mark.parametrize('method', HTTPMethod.names())
     def test_exist_regexp_stub(self, method: str, http_stub_factory, client):
