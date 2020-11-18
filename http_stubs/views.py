@@ -44,7 +44,7 @@ class HTTPStubView(View):
         :param kwargs: request kwargs
         :returns: http response
         """
-        stub = self.find_stub(request.method, f'/{kwargs["path"]}')
+        stub = self.find_stub(request.method, request.get_full_path())
         if not stub:
             return HttpResponseNotFound()
         LogEntry.objects.create(
