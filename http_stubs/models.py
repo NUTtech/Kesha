@@ -108,6 +108,7 @@ class LogEntry(models.Model):
 
     path = models.URLField(
         verbose_name='Full request path',
+        max_length=2000,
     )
     method = models.CharField(
         verbose_name='Request method',
