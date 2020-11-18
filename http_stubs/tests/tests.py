@@ -50,7 +50,7 @@ class TestHTTPStubView:
         content_type = 'text/plain'
         http_body = http_stub_factory(
             method=HTTPMethod.POST.name,
-            path='/regex/.*',
+            path='/regex/',
             regex_path=True,
         )
 
