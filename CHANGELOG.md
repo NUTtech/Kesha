@@ -1,6 +1,9 @@
 # Version history
 We follow [Semantic Versions](https://semver.org/).
 
+## 0.1.8
+- Fixed regex stubs with query args [#69](https://github.com/Uma-Tech/parrot/pull/69)
+
 ## 0.1.7
 - Fix build [#66](https://github.com/Uma-Tech/parrot/pull/66)
 
