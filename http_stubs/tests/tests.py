@@ -98,7 +98,7 @@ class TestHTTPStubView:
         }
         http_stub_factory(
             method=method,
-            path=r'/test/\d+/',
+            path=r'/test/\d+/\?arg=\w+',
             regex_path=True,
             resp_body=resp_body,
             resp_status=resp_status,
@@ -106,7 +106,7 @@ class TestHTTPStubView:
             resp_headers=resp_headers,
         )
         resp_method = method.lower()
-        response = getattr(client, resp_method)('/test/100500/')
+        response = getattr(client, resp_method)('/test/100500/?arg=test')
 
         if method != HTTPMethod.HEAD.name:
             assert response.content == resp_body.encode('utf-8')
