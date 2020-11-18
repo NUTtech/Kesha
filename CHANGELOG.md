@@ -1,6 +1,11 @@
 # Version history
 We follow [Semantic Versions](https://semver.org/).
 
+## 0.1.6
+- Changed max_length for LogEntry.path [#65](https://github.com/Uma-Tech/parrot/pull/65)
+- Move django secret key to env vars [#61](https://github.com/Uma-Tech/parrot/pull/61)
+- Added reading environment from the .env file [#60](https://github.com/Uma-Tech/parrot/pull/60)
+
 ## 0.1.5
 - Add PARROT_ALLOWED_HOSTS env var [#63](https://github.com/Uma-Tech/parrot/pull/63)
 
