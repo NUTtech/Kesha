@@ -22,6 +22,7 @@ RUN poetry config virtualenvs.create false && \
 COPY ./ /app/src
 
 # Build static
+ARG PARROT_SECRET_KEY=no_secret
 RUN /app/src/manage.py collectstatic --noinput
 
 # Move scripts to /app
