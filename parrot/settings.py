@@ -37,6 +37,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+if DEBUG:
+    INSTALLED_APPS.append('debug_toolbar')
+    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+
 ROOT_URLCONF = 'parrot.urls'
 
 TEMPLATES = [
@@ -109,3 +113,5 @@ SIMPLEUI_ICON = {
     'Stubs': 'fas fa-feather-alt',
     'Logs': 'fas fa-layer-group',
 }
+
+INTERNAL_IPS = env.list('PARROT_INTERNAL_HOSTS', default=['127.0.0.1'])
