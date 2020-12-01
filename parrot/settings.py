@@ -14,6 +14,7 @@ ALLOWED_HOSTS = env.list('PARROT_ALLOWED_HOSTS', default=['127.0.0.1'])
 
 INSTALLED_APPS = [
     'simpleui',
+    'django_extensions',
 
     'django.contrib.admin',
     'django.contrib.auth',
