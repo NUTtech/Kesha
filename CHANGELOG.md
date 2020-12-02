@@ -1,6 +1,10 @@
 # Version history
 We follow [Semantic Versions](https://semver.org/).
 
+## 0.1.9
+- Fixed enormously long logs page loading time [#75](https://github.com/Uma-Tech/parrot/pull/75)
+- Added django-extensions and ipython for ease of development [#74](https://github.com/Uma-Tech/parrot/pull/74)
+
 ## 0.1.8
 - Fixed regex stubs with query args [#69](https://github.com/Uma-Tech/parrot/pull/69)
 
