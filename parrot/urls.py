@@ -1,9 +1,10 @@
 import re
 
+import debug_toolbar
 from django.conf import settings
 from django.contrib import admin
 from django.shortcuts import redirect
-from django.urls import path, re_path
+from django.urls import include, path, re_path
 from django.views import static
 
 from http_stubs import views
@@ -25,3 +26,6 @@ urlpatterns += [re_path(
 urlpatterns += [
     path('<path:path>', views.HTTPStubView.as_view()),
 ]
+
+if settings.DEBUG:
+    urlpatterns.insert(0, path('__debug__/', include(debug_toolbar.urls)))

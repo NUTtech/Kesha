@@ -35,8 +35,8 @@ class LogEntryAdmin(admin.ModelAdmin):
         return False
 
     list_display = ('pk', 'date', 'http_stub', 'source_ip')
-
-    list_filter = ('date', 'method', 'path', 'source_ip')
+    list_filter = ('date', 'method')
+    search_fields = ('path', 'source_ip')
 
 
 @admin.register(models.HTTPStub)

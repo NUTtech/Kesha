@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "parrot"
-version = "0.1.8"
+version = "0.1.9"
 description = "Service for testing http requests and webhooks."
 authors = ["Evgeniy Mitin <emitin@uma.tech>"]
 maintainers = ["Evgeniy Mitin <emitin@uma.tech>"]
@@ -26,6 +26,8 @@ django-simpleui = "~2020.9"
 uvicorn = "~0.12.2"
 psycopg2 = "~2.8.6"
 django-environ = "^0.4.5"
+django-extensions = "^3.1.0"
+django-debug-toolbar = "^3.1.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "~6.1"
@@ -37,6 +39,7 @@ flake8-use-fstring = "~1.1"
 flake8-django = "~1.1.1"
 flake8-type-annotations = "~0.1.0"
 flake8-annotations-coverage = "~0.0.4"
+ipython = "^7.19.0"
 
 [build-system]
 requires = ["poetry>=1.0.5"]
