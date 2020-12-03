@@ -1,6 +1,9 @@
 # Version history
 We follow [Semantic Versions](https://semver.org/).
 
+## 0.1.10
+- Fixed issue with Vue breaking on log entries [#79](https://github.com/Uma-Tech/parrot/pull/79)
+
 ## 0.1.9
 - Fixed enormously long logs page loading time [#75](https://github.com/Uma-Tech/parrot/pull/75)
 - Added django-extensions and ipython for ease of development [#74](https://github.com/Uma-Tech/parrot/pull/74)
