@@ -14,20 +14,6 @@ admin.site.site_header = 'Parrot Admin'
 class LogEntryAdmin(admin.ModelAdmin):
     """Log entries admin."""
 
-    def get_readonly_fields(self, *args, **kwargs) -> list:
-        """Mark all fields read-only.
-
-        Generates list of all fields so that fields added in future would be
-        also added here.
-
-        :param args: optional args
-        :param kwargs: optional kwargs
-        :returns: list of fields.
-        """
-        fields = [field.name for field in self.model._meta.fields
-                  if field.name not in self.exclude]
-        return fields + list(self.readonly_fields)
-
     def has_add_permission(self, *args, **kwargs) -> bool:
         """Forbids adding new entries.
 
@@ -49,10 +35,19 @@ class LogEntryAdmin(admin.ModelAdmin):
 
     pretty_body.short_description = 'Jsonify request body'
 
-    list_display = ('pk', 'date', 'http_stub', 'source_ip')
     list_filter = ('date', 'method')
     search_fields = ('path', 'source_ip')
-    readonly_fields = ('body', 'pretty_body')
+    readonly_fields = (
+        'pk',
+        'date',
+        'http_stub',
+        'path',
+        'method',
+        'source_ip',
+        'headers',
+        'body',
+        'pretty_body',
+    )
 
 
 @admin.register(models.HTTPStub)
