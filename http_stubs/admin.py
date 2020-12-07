@@ -1,10 +1,8 @@
 import json
-from textwrap import wrap
 
 from django.contrib import admin
 from django.db.models import QuerySet
 from django.http import HttpRequest
-from django.utils.safestring import mark_safe
 
 from http_stubs import models
 
@@ -39,12 +37,6 @@ class LogEntryAdmin(admin.ModelAdmin):
         """
         return False
 
-    def raw_body(self, instance):
-        """Wrapped raw body."""
-        return mark_safe('<br>'.join(wrap(instance.body, width=240)))
-
-    raw_body.short_description = 'Raw request body'
-
     def pretty_body(self, instance):
         """Jsonify the request body if possible."""
         try:
@@ -52,17 +44,15 @@ class LogEntryAdmin(admin.ModelAdmin):
         except json.JSONDecodeError:
             body = None
         else:
-            body = json.dumps(body, indent=4)
-        body = body.replace(' ', '&nbsp;').replace('\n', '<br>')
-        return mark_safe(body)
+            body = json.dumps(body, indent=2)
+        return body
 
     pretty_body.short_description = 'Jsonify request body'
 
-    list_display = ('pk', 'date', 'http_stub', 'source_ip',)
+    list_display = ('pk', 'date', 'http_stub', 'source_ip')
     list_filter = ('date', 'method')
     search_fields = ('path', 'source_ip')
-    readonly_fields = ('raw_body', 'pretty_body',)
-    exclude = ('body',)
+    readonly_fields = ('body', 'pretty_body')
 
 
 @admin.register(models.HTTPStub)
