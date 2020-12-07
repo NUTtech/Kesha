@@ -23,8 +23,12 @@ class LogEntryAdmin(admin.ModelAdmin):
         """
         return False
 
-    def pretty_body(self, instance):
-        """Jsonify the request body if possible."""
+    def pretty_body(self, instance) -> str:
+        """Jsonify the request body if possible.
+
+        :param instance: instance of LogEntry
+        :returns: jsonify body
+        """
         try:
             body = json.loads(instance.body)
         except json.JSONDecodeError:
