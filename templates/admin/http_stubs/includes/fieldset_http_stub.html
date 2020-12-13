@@ -5,7 +5,7 @@
     {# added request url for path field(issue #35) #}
     {% if field.field.name == 'path' %}
         <div class="readonly">
-            <div id="full-path">{% absolute field.field.value %}</div>
+            <div id="full-path">{% absolute field.field.value fieldset %}</div>
             <div id="path-copied-alert">Copied!</div>
         </div>
     {% endif %}
