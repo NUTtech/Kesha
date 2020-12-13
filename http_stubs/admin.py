@@ -58,6 +58,7 @@ class LogEntryAdmin(admin.ModelAdmin):
 class HTTPStubAdmin(admin.ModelAdmin):
     """HTTP stub admin."""
 
+    change_form_template = 'admin/http_stubs/httpstub/change_form.html'
     extra_buttons_style = 'background-color:#00b0ff;color:white'
 
     actions = ['enable_action', 'disable_action']

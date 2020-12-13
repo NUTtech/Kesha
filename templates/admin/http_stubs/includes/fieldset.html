@@ -1,6 +1,6 @@
 {% load stub_tags %}
 <fieldset class="module aligned {{ fieldset.classes }}">
-<legend></legend>
+    <legend></legend>
     {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
     {% if fieldset.description %}
         <div class="description">{{ fieldset.description|safe }}</div>
@@ -16,19 +16,13 @@
                     {% else %}
                         {{ field.label_tag }}
                         {% if field.is_readonly %}
-                            <div class="readonly">
-                                {% if field.field.name == 'pretty_body' %}
-                                    <pre>{{ field.contents }}</pre>
-                                {% elif field.field.name == 'body' %}
-                                    <div style="overflow:auto;width:85vw;">{{ field.contents }}</div>
-                                {% else %}
-                                    {{ field.contents }}
-                                {% endif %}
-                            </div>
+                            {% block readonly_field %}
+                                <div class="readonly">{{ field.contents }}</div>
+                            {% endblock %}
                         {% else %}
-                            {{ field.field }}
-                            {# added request url for path field(issue #35) #}
-                            {% if field.field.name == 'path' %}<div class="readonly"><div id="full-path">{% absolute field.field.value %}</div><div id="path-copied-alert">Copied!</div></div>{% endif %}
+                            {% block writable_field %}
+                                {{ field.field }}
+                            {% endblock %}
                         {% endif %}
                     {% endif %}
                     {% if field.field.help_text %}
@@ -201,32 +195,14 @@ var ImagePreview = {
         }
     }
     ImagePreview.init({id:$("#imgBox img")});
-
-
-      // copy content to clipboard
-    function copyToClipboard(element) {
-        var $temp = $("<input>");
-        $("body").append($temp);
-        $temp.val($(element).text()).select();
-        document.execCommand("copy");
-        $temp.remove();
-    }
-
-    // copy full request path to clipboard
-    $("#full-path").on("click", function() {
-        copyToClipboard("#full-path");
-        $("#path-copied-alert").fadeIn("slow");
-    });
 </script>
-
+{% block javascripts %}
+{% endblock %}
 
 <style type="text/css">
     #imgs img {
         width: 24%;
     }
-    #path-copied-alert {
-        display: none;
-        color: green;
-        padding-left: 170px;
-    }
 </style>
+{% block css %}
+{% endblock %}
