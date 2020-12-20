@@ -1,11 +1,6 @@
 version: "3.8"
 
-x-default-env: &default-env
-  environment:
-    - DEBUG
-
 x-service-base: &service-base
-  <<: *default-env
   image: umahighload/parrot-app:latest
   restart: unless-stopped
 
@@ -16,7 +11,9 @@ services:
     build:
       context: .
       dockerfile: ./deploy/app/Dockerfile
+    env_file:
+      - .gen.env
     ports:
-    - "8042:8042"
+      - "8042:8042"
     container_name: parrot-app
     command: bash /app/start-django-uvicorn.sh

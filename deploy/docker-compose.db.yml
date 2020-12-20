@@ -7,7 +7,7 @@ services:
       - "parrot-database"
 
   parrot-database:
-    image: hub.zxz.su/common/doci/postgres:12.3-05045d0f
+    image: postgres:12.3
     restart: unless-stopped
     container_name: parrot-database
     environment:
