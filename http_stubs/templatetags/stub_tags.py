@@ -1,6 +1,5 @@
 import json
 from html import unescape
-from json import JSONDecodeError
 from typing import AnyStr, Dict, List, Optional
 from urllib.parse import urlunparse
 
@@ -48,7 +47,7 @@ def headers_to_list(headers: AnyStr) -> List:
     """
     try:
         headers = json.loads(unescape(headers).replace("'", '"'))
-    except (TypeError, JSONDecodeError):
+    except (TypeError, json.JSONDecodeError):
         return []
     return [
         f'{header}: {header_value}'
