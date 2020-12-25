@@ -1,0 +1,40 @@
+{% extends 'admin/http_stubs/includes/fieldset.html' %}
+{% load stub_tags %}
+{% block writable_field %}
+    {{ field.field }}
+    {# added request url for path field(issue #35) #}
+    {% if field.field.name == 'path' %}
+        <div class="readonly">
+            <div id="full-path">{% absolute field.field.value fieldset %}</div>
+            <div id="path-copied-alert">Copied!</div>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+    // copy content to clipboard
+    function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+    }
+
+    // copy full request path to clipboard
+    $("#full-path").on("click", function() {
+        copyToClipboard("#full-path");
+        $("#path-copied-alert").fadeIn("slow");
+    });
+
+</script>
+{% endblock %}
+{% block css %}
+<style type="text/css">
+    #path-copied-alert {
+        display: none;
+        color: green;
+        padding-left: 170px;
+    }
+</style>
+{% endblock %}

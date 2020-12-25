@@ -7,7 +7,7 @@ services:
       - "parrot-database"
 
   parrot-database:
-    image: hub.zxz.su/common/doci/postgres:12.3-05045d0f
+    image: postgres:12.3
     restart: unless-stopped
     container_name: parrot-database
     environment:
@@ -17,6 +17,18 @@ services:
       - "5432"
     volumes:
       - "${PARROT_DB_VOLUME:-db-volume}:/var/lib/postgresql/data"
+    networks:
+      app:
+      celery:
+
+  parrot-celery-broker:
+    image: redis:6
+    restart: unless-stopped
+    container_name: parrot-celery-broker
+    networks:
+      app:
+      celery:
+
 
 volumes:
   db-volume:

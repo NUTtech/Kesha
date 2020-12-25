@@ -4,6 +4,7 @@ services:
 
   parrot-app:
     command: bash /app/start-django-dev.sh
+    privileged: true
     environment:
       - DEBUG=1
     volumes:

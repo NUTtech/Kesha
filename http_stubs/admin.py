@@ -1,3 +1,5 @@
+import json
+
 from django.contrib import admin
 from django.db.models import QuerySet
 from django.http import HttpRequest
@@ -12,21 +14,8 @@ admin.site.site_header = 'Parrot Admin'
 class LogEntryAdmin(admin.ModelAdmin):
     """Log entries admin."""
 
-    def get_readonly_fields(self, *args, **kwargs) -> list:
-        """Mark all fields read-only.
-
-        Generates list of all fields so that fields added in future would be
-        also added here.
-
-        :param args: optional args
-        :param kwargs: optional kwargs
-        :returns: list of fields.
-        """
-        return [field.name for field in self.model._meta.fields]  # noqa:WPS437
-
     def has_add_permission(self, *args, **kwargs) -> bool:
-        """
-        Forbids adding new entries.
+        """Forbids adding new entries.
 
         :param args: optional args
         :param kwargs: optional kwargs
@@ -34,15 +23,44 @@ class LogEntryAdmin(admin.ModelAdmin):
         """
         return False
 
-    list_display = ('pk', 'date', 'http_stub', 'source_ip')
+    def pretty_body(self, instance) -> str:
+        """Jsonify the request body if possible.
+
+        :param instance: instance of LogEntry
+        :returns: jsonify body
+        """
+        try:
+            body = json.loads(instance.body)
+        except json.JSONDecodeError:
+            body = None
+        else:
+            body = json.dumps(body, indent=2)
+        return body
+
+    pretty_body.short_description = 'Jsonify request body'
+
     list_filter = ('date', 'method')
     search_fields = ('path', 'source_ip')
+    list_display = ('pk', 'date', 'http_stub', 'source_ip')
+    readonly_fields = (
+        'pk',
+        'date',
+        'http_stub',
+        'path',
+        'method',
+        'source_ip',
+        'headers',
+        'body',
+        'pretty_body',
+        'result_script',
+    )
 
 
 @admin.register(models.HTTPStub)
 class HTTPStubAdmin(admin.ModelAdmin):
     """HTTP stub admin."""
 
+    change_form_template = 'admin/http_stubs/httpstub/change_form.html'
     extra_buttons_style = 'background-color:#00b0ff;color:white'
 
     actions = ['enable_action', 'disable_action']

@@ -2,14 +2,12 @@
 	help
 	lock-deps
 	shell
-	lint
 	autotests
+	lint
+	build
+	envfile
 	runserver
 	runserver-uvicorn
-	build
-	push
-	pull
-	deploy
 
 .DEFAULT_GOAL := help
 
@@ -61,7 +59,11 @@ build:  ## Build docker image
 		--project-directory . \
 		build parrot-app
 
-runserver:  ## Local startup the app on docker with required services
+envfile:  ## Generate env file with variables with prefix PARROT_
+	$(shell env | egrep '^PARROT_' > .gen.env && echo '.gen.env has been generated' || touch .gen.env)
+	$(shell test -f .env && cat .env > .gen.env)
+
+runserver:  envfile  ## Local startup the app on docker with required services
 	docker-compose \
 		-f deploy/docker-compose.yml \
 		-f deploy/docker-compose.db.yml \
@@ -70,7 +72,7 @@ runserver:  ## Local startup the app on docker with required services
 		--project-directory . \
 		up
 
-runserver-uvicorn:  ## Local startup the app on docker with uvicorn
+runserver-uvicorn:  envfile  ## Local startup the app on docker with uvicorn
 	docker-compose \
 		-f deploy/docker-compose.yml \
 		-f deploy/docker-compose.db.yml \

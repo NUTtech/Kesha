@@ -2,6 +2,10 @@ import pytest
 
 from _pytest.fixtures import FixtureFunctionMarker
 
+from parrot import celery_app
+
+celery_app.conf['CELERY_ALWAYS_EAGER'] = True
+
 
 @pytest.fixture(autouse=True)
 def db_connect(db: FixtureFunctionMarker):
