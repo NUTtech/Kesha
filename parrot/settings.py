@@ -1,5 +1,6 @@
-import environ
 from pathlib import Path
+
+import environ
 
 env = environ.Env()
 
@@ -115,3 +116,13 @@ SIMPLEUI_ICON = {
 }
 
 INTERNAL_IPS = env.list('PARROT_INTERNAL_HOSTS', default=['127.0.0.1'])
+
+# Celery settings
+CELERY_BROKER_URL = env(
+    'PARROT_CELERY_BROKER_URL',
+    default='redis://parrot-celery-broker',
+)
+CELERY_TASK_TIME_LIMIT = 20
+CELERY_TASK_SOFT_TIME_LIMIT = 10
+CELERY_TASK_DEFAULT_RATE_LIMIT = '96/m'
+CELERY_MAX_MEMORY_PER_CHILD = 65536

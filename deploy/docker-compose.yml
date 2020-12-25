@@ -1,19 +1,32 @@
 version: "3.8"
 
 x-service-base: &service-base
-  image: umahighload/parrot-app:latest
+  image: umahighload/parrot-app:${PARROT_APP_VERSION:-latest}
   restart: unless-stopped
+  env_file:
+    - .gen.env
+  build:
+    context: .
+    dockerfile: ./deploy/app/Dockerfile
 
 services:
 
   parrot-app:
     <<: *service-base
-    build:
-      context: .
-      dockerfile: ./deploy/app/Dockerfile
-    env_file:
-      - .gen.env
-    ports:
-      - "8042:8042"
     container_name: parrot-app
     command: bash /app/start-django-uvicorn.sh
+    ports:
+      - "8042:8042"
+    networks:
+      app:
+
+  parrot-celery-worker:
+    <<: *service-base
+    container_name: parrot-celery-worker
+    command: celery -A parrot worker -l INFO -c 8
+    networks:
+      celery:
+
+networks:
+    app:
+    celery:

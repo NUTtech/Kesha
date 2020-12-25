@@ -17,6 +17,18 @@ services:
       - "5432"
     volumes:
       - "${PARROT_DB_VOLUME:-db-volume}:/var/lib/postgresql/data"
+    networks:
+      app:
+      celery:
+
+  parrot-celery-broker:
+    image: redis:6
+    restart: unless-stopped
+    container_name: parrot-celery-broker
+    networks:
+      app:
+      celery:
+
 
 volumes:
   db-volume:

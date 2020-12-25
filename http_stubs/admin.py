@@ -41,6 +41,7 @@ class LogEntryAdmin(admin.ModelAdmin):
 
     list_filter = ('date', 'method')
     search_fields = ('path', 'source_ip')
+    list_display = ('pk', 'date', 'http_stub', 'source_ip')
     readonly_fields = (
         'pk',
         'date',
@@ -51,6 +52,7 @@ class LogEntryAdmin(admin.ModelAdmin):
         'headers',
         'body',
         'pretty_body',
+        'result_script',
     )
 
 

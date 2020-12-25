@@ -52,6 +52,7 @@ class TestHTTPStubView:
             method=HTTPMethod.POST.name,
             path='/regex/',
             regex_path=True,
+            request_script='a = 1',
         )
 
         request_path = f'/regex/?query={"search" * 300}'
@@ -80,6 +81,7 @@ class TestHTTPStubView:
         assert log.http_stub == http_body
         assert log.method == HTTPMethod.POST.name
         assert log.path == f'http://testserver{request_path}'
+        assert log.result_script == 'Done'
 
     @pytest.mark.parametrize('method', HTTPMethod.names())
     def test_exist_regexp_stub(self, method: str, http_stub_factory, client):

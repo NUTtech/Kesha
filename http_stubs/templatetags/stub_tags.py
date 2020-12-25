@@ -1,7 +1,7 @@
 import json
 from html import unescape
 from json import JSONDecodeError
-from typing import AnyStr, Dict, List
+from typing import AnyStr, Dict, List, Optional
 from urllib.parse import urlunparse
 
 from django import template
@@ -14,7 +14,7 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context=True, name='absolute')
-def absolute_url(context: Dict, url: Url, fieldset: Fieldset) -> Url:
+def absolute_url(context: Dict, url: Url, fieldset: Fieldset) -> Optional[Url]:
     """Tag that returns an absolute url.
 
     :param context: context of request
@@ -23,6 +23,8 @@ def absolute_url(context: Dict, url: Url, fieldset: Fieldset) -> Url:
                      field from the form
     :returns: absolute url
     """
+    if not url or not fieldset:
+        return ''
     request = context['request']
     form = fieldset.form
     if form.initial.get('regex_path'):

@@ -60,7 +60,8 @@ build:  ## Build docker image
 		build parrot-app
 
 envfile:  ## Generate env file with variables with prefix PARROT_
-	env | egrep ^PARROT_ > .gen.env
+	$(shell env | egrep '^PARROT_' > .gen.env && echo '.gen.env has been generated' || touch .gen.env)
+	$(shell test -f .env && cat .env > .gen.env)
 
 runserver:  envfile  ## Local startup the app on docker with required services
 	docker-compose \
