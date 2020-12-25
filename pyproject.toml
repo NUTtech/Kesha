@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "parrot"
-version = "0.1.10"
+version = "1.0.0"
 description = "Service for testing http requests and webhooks."
 authors = ["Evgeniy Mitin <emitin@uma.tech>"]
 maintainers = ["Evgeniy Mitin <emitin@uma.tech>"]

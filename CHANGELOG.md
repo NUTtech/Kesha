@@ -1,6 +1,19 @@
 # Version history
 We follow [Semantic Versions](https://semver.org/).
 
+## 1.0.0 - First stable release
+### New functionality
+- Custom script for each request [#70](https://github.com/Uma-Tech/parrot/pull/70)
+
+### Bug fixes
+- Fix absolute request url in HttpStubAdmin with regex [#78](https://github.com/Uma-Tech/parrot/pull/78)
+
+### Minor improvements
+- Fix lgtm alert [#90](https://github.com/Uma-Tech/parrot/pull/90)
+- Improves deploy [#85](https://github.com/Uma-Tech/parrot/pull/85)
+- Display headers in column [#46](https://github.com/Uma-Tech/parrot/pull/46)
+- Formatting request body [#52](https://github.com/Uma-Tech/parrot/pull/52)
+
 ## 0.1.10
 - Fixed issue with Vue breaking on log entries [#79](https://github.com/Uma-Tech/parrot/pull/79)
 
