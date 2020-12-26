@@ -286,7 +286,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "django-simpleui"
-version = "2020.9.26"
+version = "2021.1.1"
 description = "django admin theme 后台模板"
 category = "main"
 optional = false
@@ -1143,7 +1143,7 @@ typing_extensions = ">=3.6,<4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.8"
-content-hash = "c20814e42c0b213a479948fe660c2e3c31473f7f96acd18f4fee04bafa6af90c"
+content-hash = "e77ddfe7ad1a380499344accc2b8da597a8c88b3e2ff6af888f1595ace6d538c"
 
 [metadata.files]
 amqp = [
@@ -1289,7 +1289,7 @@ django-extensions = [
     {file = "django_extensions-3.1.0-py3-none-any.whl", hash = "sha256:c7f88625a53f631745d4f2bef9ec4dcb999ed59476393bdbbe99db8596778846"},
 ]
 django-simpleui = [
-    {file = "django-simpleui-2020.9.26.tar.gz", hash = "sha256:a41ebe4696f108dc68de4b44211f2141a4e0d3bd63207e39cf4654c3b73e4732"},
+    {file = "django-simpleui-2021.1.1.tar.gz", hash = "sha256:1f111be0ffab9132980762a5cc9d4d25fb4abc61c93cee406f6d5cf85d0b4a51"},
 ]
 docutils = [
     {file = "docutils-0.16-py2.py3-none-any.whl", hash = "sha256:0c5b78adfbf7762415433f5515cd5c9e762339e23369dbe8000d84a4bf4ab3af"},
