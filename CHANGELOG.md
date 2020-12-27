@@ -1,6 +1,16 @@
 # Version history
 We follow [Semantic Versions](https://semver.org/).
 
+## 1.0.1 - Improving docs
+
+### Important changes
+- Improving docs [#91](https://github.com/Uma-Tech/parrot/pull/91)
+
+### Updating dependencies
+- django-simpleui from 2020.9.26 to 2021.1.1 [#80](https://github.com/Uma-Tech/parrot/pull/80)
+- pytest from 6.1.2 to 6.2.1 [#88](https://github.com/Uma-Tech/parrot/pull/88)
+- uvicorn from 0.12.3 to 0.13.2 [#89](https://github.com/Uma-Tech/parrot/pull/89)
+
 ## 1.0.0 - First stable release
 ### New functionality
 - Custom script for each request [#70](https://github.com/Uma-Tech/parrot/pull/70)

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "parrot"
-version = "1.0.0"
+version = "1.0.1"
 description = "Service for testing http requests and webhooks."
 authors = ["Evgeniy Mitin <emitin@uma.tech>"]
 maintainers = ["Evgeniy Mitin <emitin@uma.tech>"]
@@ -22,8 +22,8 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "~3.8"
 django = "~3.1"
-django-simpleui = "~2020.9"
-uvicorn = "~0.12.2"
+django-simpleui = "~2021.1"
+uvicorn = "~0.13.2"
 psycopg2 = "~2.8.6"
 django-environ = "^0.4.5"
 django-extensions = "^3.1.0"
@@ -33,7 +33,7 @@ RestrictedPython = "~5.1"
 requests = "^2.25.1"
 
 [tool.poetry.dev-dependencies]
-pytest = "~6.1"
+pytest = "~6.2"
 pytest-django = "~4.1.0"
 pytest-cov = "~2.10.1"
 pytest-freezegun = "^0.4.2"
