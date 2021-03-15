@@ -18,9 +18,8 @@ class HTTPMethod(models.TextChoices):
     TRACE = 'TRACE'
 
 
-
-class HTTPStub(models.Model):
-    """HTTP stub."""
+class AbstractHTTPStub(models.Model):
+    """Abstract HTTP stub."""
 
     is_active = models.BooleanField(
         verbose_name='Enabled',
@@ -36,16 +35,41 @@ class HTTPStub(models.Model):
         help_text='Path is a regular expression',
         default=False,
     )
-    enable_logging = models.BooleanField(
-        verbose_name='Logging',
-        help_text='Enables logging of requests',
-        default=False,
-    )
     method = models.CharField(
         verbose_name='Request method',
         max_length=10,
         db_index=True,
         choices=HTTPMethod.choices,
+    )
+    request_script = models.TextField(
+        verbose_name='Request script',
+        help_text='Language: python 3.8. The script will run on each request.',
+        blank=True,
+    )
+
+    def __str__(self):
+        """Return string representation of the model.
+
+        :returns: e.g. `get: /test/`.
+        """
+        return f'{self.method}: {self.path}'
+
+    class Meta:
+        abstract = True
+        constraints = [
+            models.UniqueConstraint(
+                fields=('path', 'method'), name='uniq-path-method',
+            ),
+        ]
+
+
+class HTTPStub(AbstractHTTPStub):
+    """HTTP stub."""
+
+    enable_logging = models.BooleanField(
+        verbose_name='Logging',
+        help_text='Enables logging of requests',
+        default=False,
     )
     resp_delay = models.PositiveIntegerField(
         verbose_name='Response delay',
@@ -73,31 +97,26 @@ class HTTPStub(models.Model):
         default=dict,
         blank=True,
     )
-    request_script = models.TextField(
-        verbose_name='Request script',
-        help_text='Language: python 3.8. The script will run on each request.',
-        blank=True,
+
+    class Meta:
+        verbose_name = 'request http stub'
+        verbose_name_plural = 'request stubs'
+
+
+class ProxyHTTPStub(AbstractHTTPStub):
+    """Proxy HTTP stub."""
+
+    target_url = models.URLField(
+        verbose_name='Target url',
     )
 
     class Meta:
-        verbose_name = 'http stub'
-        verbose_name_plural = 'stubs'
-        constraints = [
-            models.UniqueConstraint(
-                fields=('path', 'method'), name='uniq-path-method',
-            ),
-        ]
-
-    def __str__(self):
-        """Return string representation of the model.
-
-        :returns: e.g. `get: /test/`.
-        """
-        return f'{self.method}: {self.path}'
+        verbose_name = 'proxy http stub'
+        verbose_name_plural = 'proxy stubs'
 
 
-class LogEntry(models.Model):
-    """Log entry."""
+class AbstractLogEntry(models.Model):
+    """Abstract log entry."""
 
     path = models.URLField(
         verbose_name='Full request path',
@@ -111,23 +130,16 @@ class LogEntry(models.Model):
     source_ip = models.GenericIPAddressField(
         verbose_name='Source IP',
     )
-    date = models.DateTimeField(
+    request_date = models.DateTimeField(
         verbose_name='Request timestamp',
         auto_now_add=True,
         editable=False,
     )
-    body = models.TextField(
-        verbose_name='Request body',
-    )
-    headers = HStoreField(
+    request_headers = HStoreField(
         verbose_name='Request headers',
     )
-    http_stub = models.ForeignKey(
-        HTTPStub,
-        verbose_name='Related stub',
-        related_name='logs',
-        blank=True,
-        on_delete=models.CASCADE,
+    request_body = models.TextField(
+        verbose_name='Request body',
     )
     result_script = models.CharField(
         verbose_name='Result script',
@@ -135,16 +147,58 @@ class LogEntry(models.Model):
         blank=True,
     )
 
-    class Meta:
-        verbose_name = 'log'
-        verbose_name_plural = 'logs'
-
     def __str__(self) -> str:
         """Return string representation of the model.
 
         :returns: empty string to make admin look cleaner
         """
         return ''
+
+
+class LogEntry(AbstractLogEntry):
+    """Log entry."""
+
+    http_stub = models.ForeignKey(
+        HTTPStub,
+        verbose_name='Related stub',
+        related_name='logs',
+        on_delete=models.CASCADE,
+    )
+
+    class Meta:
+        verbose_name = 'request log'
+        verbose_name_plural = 'request logs'
+
+
+class ProxyLogEntity(AbstractLogEntry):
+    """Proxy log entry."""
+
+    http_stub = models.ForeignKey(
+        ProxyHTTPStub,
+        verbose_name='Related proxy stub',
+        related_name='logs',
+        on_delete=models.CASCADE,
+    )
+    response_date = models.DateTimeField(
+        verbose_name='Response timestamp',
+        help_text='From target',
+        editable=False,
+    )
+    response_latency = models.IntegerField(
+        verbose_name='Response latency',
+    )
+    response_body = models.TextField(
+        verbose_name='Response body',
+        help_text='From target',
+    )
+    response_headers = HStoreField(
+        verbose_name='Response headers',
+        help_text='From target',
+    )
+
+    class Meta:
+        verbose_name = 'proxy log'
+        verbose_name_plural = 'proxy logs'
 
 
 @models.CharField.register_lookup

@@ -111,8 +111,10 @@ SIMPLEUI_LOGO = STATIC_URL + 'kesha_icon.png'
 
 SIMPLEUI_ICON = {
     'HTTP Stubs': 'fas fa-feather-alt',
-    'Stubs': 'fas fa-feather-alt',
-    'Logs': 'fas fa-layer-group',
+    'Request stubs': 'fas fa-feather-alt',
+    'Request logs': 'fas fa-layer-group',
+    'Proxy stubs': 'fas fa-feather-alt',
+    'Proxy logs': 'fas fa-layer-group',
 }
 
 INTERNAL_IPS = env.list('KESHA_INTERNAL_HOSTS', default=['127.0.0.1'])
