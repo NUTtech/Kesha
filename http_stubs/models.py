@@ -1,12 +1,11 @@
-from enum import Enum
-from typing import Iterator, KeysView, Tuple
+from typing import Tuple
 
 from django.contrib.postgres.fields import HStoreField
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 
-class HTTPMethod(Enum):
+class HTTPMethod(models.TextChoices):
     """Enumeration of the available HTTP methods."""
 
     GET = 'GET'
@@ -18,21 +17,6 @@ class HTTPMethod(Enum):
     OPTIONS = 'OPTIONS'
     TRACE = 'TRACE'
 
-    @classmethod
-    def names(cls) -> KeysView[str]:
-        """Set of the available HTTP method names.
-
-        :returns: all names in the enumeration.
-        """
-        return cls.__members__.keys()
-
-    @classmethod
-    def slugs(cls) -> Iterator[Tuple[str, str]]:
-        """Names of the methods for the model choice fields.
-
-        :returns: iterator of tuples with http method names
-        """
-        return zip(cls.names(), cls.names())
 
 
 class HTTPStub(models.Model):
@@ -61,7 +45,7 @@ class HTTPStub(models.Model):
         verbose_name='Request method',
         max_length=10,
         db_index=True,
-        choices=HTTPMethod.slugs(),
+        choices=HTTPMethod.choices,
     )
     resp_delay = models.PositiveIntegerField(
         verbose_name='Response delay',
@@ -122,7 +106,7 @@ class LogEntry(models.Model):
     method = models.CharField(
         verbose_name='Request method',
         max_length=10,
-        choices=HTTPMethod.slugs(),
+        choices=HTTPMethod.choices,
     )
     source_ip = models.GenericIPAddressField(
         verbose_name='Source IP',
