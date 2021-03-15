@@ -9,7 +9,7 @@ from http_stubs.models import HTTPMethod, LogEntry
 class TestHTTPStubView:
     """Tests representation of the http stubs."""
 
-    @pytest.mark.parametrize('method', HTTPMethod.names())
+    @pytest.mark.parametrize('method', HTTPMethod.values)
     def test_nonexistent_stub(self, method: str, client):
         """Tests response when stub is not found.
 
@@ -22,7 +22,7 @@ class TestHTTPStubView:
 
         assert response.status_code == HTTPStatus.NOT_FOUND
 
-    @pytest.mark.parametrize('method', HTTPMethod.names())
+    @pytest.mark.parametrize('method', HTTPMethod.values)
     def test_exist_not_regexp_stub(
         self, method: str, http_stub_factory, client,
     ):
@@ -96,7 +96,7 @@ class TestHTTPStubView:
         assert response.status_code == HTTPStatus.OK
         assert LogEntry.objects.last() is None
 
-    @pytest.mark.parametrize('method', HTTPMethod.names())
+    @pytest.mark.parametrize('method', HTTPMethod.values)
     def test_exist_regexp_stub(self, method: str, http_stub_factory, client):
         """Tests response for the regex stub.
 
