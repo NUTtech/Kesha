@@ -35,7 +35,7 @@ requests = "^2.25.1"
 [tool.poetry.dev-dependencies]
 pytest = "~6.2"
 pytest-django = "~4.1.0"
-pytest-cov = "~2.10.1"
+pytest-cov = "~2.11.1"
 pytest-freezegun = "^0.4.2"
 wemake-python-styleguide = "~0.14.1"
 flake8-use-fstring = "~1.1"
