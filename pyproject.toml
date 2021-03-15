@@ -41,7 +41,7 @@ wemake-python-styleguide = "~0.14.1"
 flake8-use-fstring = "~1.1"
 flake8-django = "~1.1.1"
 flake8-type-annotations = "~0.1.0"
-flake8-annotations-coverage = "~0.0.4"
+flake8-annotations-coverage = "~0.0.5"
 ipython = "^7.21.0"
 
 [build-system]

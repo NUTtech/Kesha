@@ -326,7 +326,7 @@ pyflakes = ">=2.2.0,<2.3.0"
 
 [[package]]
 name = "flake8-annotations-coverage"
-version = "0.0.4"
+version = "0.0.5"
 description = "A flake8 extension that checks for type annotations coverage"
 category = "dev"
 optional = false
@@ -1143,7 +1143,7 @@ typing_extensions = ">=3.6,<4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.8"
-content-hash = "e20a3d95570522ae48e9ba617271b2e5fde7524fafe706b395a457a1fa8d2403"
+content-hash = "7426f22a5cdd46d62271e03e371ef52d65e02a2e6bcc8346bef3bfb731fedbe9"
 
 [metadata.files]
 amqp = [
@@ -1303,7 +1303,7 @@ flake8 = [
     {file = "flake8-3.8.4.tar.gz", hash = "sha256:aadae8761ec651813c24be05c6f7b4680857ef6afaae4651a4eccaef97ce6c3b"},
 ]
 flake8-annotations-coverage = [
-    {file = "flake8_annotations_coverage-0.0.4.tar.gz", hash = "sha256:65ef219d103f95d56e78604a335edb52b8de73baa85f6a975a20967cfb0f4c57"},
+    {file = "flake8_annotations_coverage-0.0.5.tar.gz", hash = "sha256:6a209073d1afd31352ff8eedb4521d6210993cba51fbfff850e3d80c6b528f58"},
 ]
 flake8-bandit = [
     {file = "flake8_bandit-2.1.2.tar.gz", hash = "sha256:687fc8da2e4a239b206af2e54a90093572a60d0954f3054e23690739b0b0de3b"},
