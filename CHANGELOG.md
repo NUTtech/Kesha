@@ -1,6 +1,21 @@
 # Version history
 We follow [Semantic Versions](https://semver.org/).
 
+## 1.1.0 - Disable logs by default
+
+### Important changes
+- Disable the log for a specific stub [#110](https://github.com/Uma-Tech/parrot/pull/110)
+
+### Updating dependencies
+- django-simpleui from 2021.1.1 to 2021.3 [#106](https://github.com/Uma-Tech/parrot/pull/106)
+- django-extensions from 3.1.0 to 3.1.1 [#101](https://github.com/Uma-Tech/parrot/pull/101)
+- pytest-cov from 2.10.1 to 2.11.1 [#96](https://github.com/Uma-Tech/parrot/pull/96)
+- pytest from 6.2.1 to 6.2.2 [#97](https://github.com/Uma-Tech/parrot/pull/97)
+- uvicorn from 0.13.2 to 0.13.4 [#105](https://github.com/Uma-Tech/parrot/pull/105)
+- django from 3.1.4 to 3.1.7 [#104](https://github.com/Uma-Tech/parrot/pull/104)
+- flake8-annotations-coverage from 0.0.4 to 0.0.5 [#94](https://github.com/Uma-Tech/parrot/pull/94)
+- ipython from 7.19.0 to 7.21.0 [#107](https://github.com/Uma-Tech/parrot/pull/107)
+
 ## 1.0.1 - Improving docs
 
 ### Important changes
