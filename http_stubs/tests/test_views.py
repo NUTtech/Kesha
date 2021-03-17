@@ -48,11 +48,12 @@ class TestHTTPStubView:
         :param client: http client fixture
         """
         content_type = 'text/plain'
-        http_body = http_stub_factory(
+        http_stub = http_stub_factory(
             method=HTTPMethod.POST.name,
             path='/regex/',
             regex_path=True,
             request_script='a = 1',
+            enable_logging=True,
         )
 
         request_path = f'/regex/?query={"search" * 300}'
@@ -78,10 +79,22 @@ class TestHTTPStubView:
             'Cookie': '',
         }
         assert log.body == 'test'
-        assert log.http_stub == http_body
+        assert log.http_stub == http_stub
         assert log.method == HTTPMethod.POST.name
         assert log.path == f'http://testserver{request_path}'
         assert log.result_script == 'Done'
+
+    def test_empty_log(self, http_stub_factory, client):
+        """Tests http stub without logs.
+
+        :param http_stub_factory: HTTPStub factory
+        :param client: http client fixture
+        """
+        stub_path = '/test/'
+        http_stub_factory(method=HTTPMethod.POST.name, path=stub_path)
+        response = client.post(stub_path)
+        assert response.status_code == HTTPStatus.OK
+        assert LogEntry.objects.last() is None
 
     @pytest.mark.parametrize('method', HTTPMethod.names())
     def test_exist_regexp_stub(self, method: str, http_stub_factory, client):

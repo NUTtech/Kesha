@@ -33,6 +33,15 @@ def test_run_request_script(script, expect, log_entity_factory):
     :param log_entity_factory: a factory for make LogEntity
     """
     log = log_entity_factory()
-    run_request_script.delay(log_id=log.id, script=script, request_body='')
+    run_request_script.delay(script=script, request_body='', log_id=log.id)
     log.refresh_from_db()
     assert log.result_script == expect
+
+
+@pytest.mark.parametrize('script', ('a = 1', '1 / 0'))
+def test_run_without_log(script):
+    """Tests run task without log_id.
+
+    :param script: a request script
+    """
+    run_request_script.run(script=script, request_body='')

@@ -1,4 +1,5 @@
 import json
+from typing import Optional
 
 import requests
 from billiard.exceptions import SoftTimeLimitExceeded
@@ -25,22 +26,32 @@ restricted_builtins = {'__builtins__': {
 
 
 @celery_app.task()
-def run_request_script(log_id: int, script: str, request_body: str) -> None:
+def run_request_script(
+    script: str,
+    request_body: str,
+    log_id: Optional[int] = None,
+) -> None:
     """Task for run custom scripts from http stubs.
 
     :param log_id: LogEntry.id
     :param script: HTTPStub.request_script
     :param request_body: text body from a request
     """
-    log: LogEntry = LogEntry.objects.get(pk=log_id)
+    log: Optional[LogEntry] = None
+    if log_id is not None:
+        log = LogEntry.objects.get(pk=log_id)
+
     loc = {'request_body': request_body, **restricted_builtins}
     byte_code = compile_restricted(script)
     try:
         exec(byte_code, loc, None)  # noqa: S102, WPS421
     except SoftTimeLimitExceeded:
-        log.result_script = 'Error: Execution time limit exceeded'
+        log_msg = 'Error: Execution time limit exceeded'
     except Exception as err:
-        log.result_script = f'Error: {err}'
+        log_msg = f'Error: {err}'
     else:
-        log.result_script = 'Done'
-    log.save()
+        log_msg = 'Done'
+
+    if log is not None:
+        log.result_script = log_msg
+        log.save()
