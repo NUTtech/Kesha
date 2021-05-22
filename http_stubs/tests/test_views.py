@@ -62,7 +62,7 @@ class TestHTTPStubView:
         log = LogEntry.objects.last()
 
         def _datefmt(date) -> str:  # noqa:WPS430
-            """Converts date object to string.
+            """Convert date object to string.
 
             For comparing datetime and FakeDateTime.
 
