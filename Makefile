@@ -24,7 +24,7 @@ lock-deps:  ## Make poetry.lock
 		-f deploy/docker-compose.develop.yml \
 		${OVERRIDE} \
 		--project-directory . \
-		run --rm parrot-app poetry lock
+		run --rm kesha poetry lock
 
 shell:  ## Shell (bash) intro the app's container
 	docker-compose \
@@ -33,7 +33,7 @@ shell:  ## Shell (bash) intro the app's container
 		-f deploy/docker-compose.develop.yml \
 		${OVERRIDE} \
 		--project-directory . \
-		run --rm parrot-app bash
+		run --rm kesha bash
 
 autotests:  ## Start project's tests on docker
 	docker-compose \
@@ -42,14 +42,14 @@ autotests:  ## Start project's tests on docker
 		-f deploy/docker-compose.autotests.yml \
 		${OVERRIDE} \
 		--project-directory . \
-		run --rm parrot-app-tests
+		run --rm kesha-tests
 
 lint:  ## Start project's lint on docker
 	docker-compose \
 	    -f deploy/docker-compose.yml \
 	    ${OVERRIDE} \
 	    --project-directory . \
-	    run --rm parrot-app \
+	    run --rm kesha \
 	        flake8 --count
 
 build:  ## Build docker image
@@ -57,10 +57,10 @@ build:  ## Build docker image
 		-f deploy/docker-compose.yml \
 		${OVERRIDE} \
 		--project-directory . \
-		build parrot-app
+		build kesha
 
-envfile:  ## Generate env file with variables with prefix PARROT_
-	$(shell env | egrep '^PARROT_' > .gen.env && echo '.gen.env has been generated' || touch .gen.env)
+envfile:  ## Generate env file with variables with prefix KESHA_
+	$(shell env | egrep '^KESHA_' > .gen.env && echo '.gen.env has been generated' || touch .gen.env)
 	$(shell test -f .env && cat .env > .gen.env)
 
 runserver:  envfile  ## Local startup the app on docker with required services

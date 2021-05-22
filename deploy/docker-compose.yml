@@ -1,7 +1,7 @@
 version: "3.8"
 
 x-service-base: &service-base
-  image: umahighload/parrot-app:${PARROT_APP_VERSION:-latest}
+  image: nextuptechnologies/kesha:${KESHA_VERSION:-latest}
   restart: unless-stopped
   env_file:
     - .gen.env
@@ -11,19 +11,19 @@ x-service-base: &service-base
 
 services:
 
-  parrot-app:
+  kesha:
     <<: *service-base
-    container_name: parrot-app
+    container_name: kesha
     command: bash /app/start-django-uvicorn.sh
     ports:
       - "8042:8042"
     networks:
       app:
 
-  parrot-celery-worker:
+  kesha-celery-worker:
     <<: *service-base
-    container_name: parrot-celery-worker
-    command: celery -A parrot worker -l INFO -c 8
+    container_name: kesha-celery-worker
+    command: celery -A kesha worker -l INFO -c 8
     networks:
       celery:
 

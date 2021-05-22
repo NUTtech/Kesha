@@ -11,8 +11,8 @@ jobs:
       postgres:
         image: postgres:12.3
         env:
-          POSTGRES_USER: parrot
-          POSTGRES_PASSWORD: parrot
+          POSTGRES_USER: kesha
+          POSTGRES_PASSWORD: kesha
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -39,8 +39,8 @@ jobs:
 
     - name: Run autotests
       env:
-        PARROT_DB_HOST: postgres
-        PARROT_SECRET_KEY: secret
+        KESHA_DB_HOST: postgres
+        KESHA_SECRET_KEY: secret
       run: |
         poetry run pytest --cov=./ --cov-report=xml
 

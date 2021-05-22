@@ -1,7 +1,7 @@
 # Summary
-# Parrot
+# Kesha
 
-- [About Parrot!](index.md)
+- [About Kesha!](index.md)
 - [Quick Start](quick-start/index.md)
     - [System requires](quick-start/system-requires.md)
     - [Local run](quick-start/local-run.md)

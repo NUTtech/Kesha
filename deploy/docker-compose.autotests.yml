@@ -2,10 +2,10 @@ version: "3.8"
 
 services:
 
-  parrot-app-tests:
-    image: umahighload/parrot-app:latest
+  kesha-tests:
+    image: nextuptechnologies/kesha:latest
     volumes:
       - ".:/app/src"
     command: bash /app/start-autotests.sh
     depends_on:
-      - "parrot-database"
+      - "kesha-database"

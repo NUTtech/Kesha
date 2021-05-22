@@ -3,8 +3,8 @@
 ## Quickstart (with Docker)
 1. Clone the repo
     ```shell
-    git clone git@github.com:Uma-Tech/parrot.git
-    cd parrot
+    git clone git@github.com:NUTtech/Kesha.git
+    cd Kesha
     ```
 
 1. Build or download the docker image  
@@ -14,7 +14,7 @@
     ```
     _for download_
     ```shell script
-    docker pull umahighload/parrot-app:latest
+    docker pull nextuptechnologies/kesha:latest
     ```
 
 1. Apply migrations and create a superuser:
@@ -36,8 +36,8 @@
 ## Start the project for development without Docker
 1. Clone the repo and go to the project directory
     ```shell
-    git clone git@github.com:Uma-Tech/parrot.git
-    cd parrot
+    git clone git@github.com:NUTtech/Kesha.git
+    cd Kesha
     ```
 
 1. Install dependencies
@@ -53,10 +53,10 @@
        --name postgres \
        -d \
        --rm \
-       -e POSTGRES_PASSWORD=parrot \
-       -e POSTGRES_USER=parrot \
+       -e POSTGRES_PASSWORD=kesha \
+       -e POSTGRES_USER=kesha \
        --network host \
-       -v parrot_db:/var/lib/postgresql/data \
+       -v kesha_db:/var/lib/postgresql/data \
        postgres
    
     # start redis
@@ -70,9 +70,9 @@
 
 1. Setting required environment variables  
     ```shell
-    export PARROT_DB_HOST=127.0.0.1
-    export PARROT_SECRET_KEY=NO_SECRET
-    export PARROT_CELERY_BROKER_URL=redis://127.0.0.1
+    export KESHA_DB_HOST=127.0.0.1
+    export KESHA_SECRET_KEY=NO_SECRET
+    export KESHA_CELERY_BROKER_URL=redis://127.0.0.1
     ```
    _Alternatively, you can create a local `.env` file with the variables_
 
@@ -99,5 +99,5 @@
 1. Start the celery worker  
    _Run in a separate terminal window_
     ```shell
-    poetry run celery -A parrot worker -l INFO -c 4
+    poetry run celery -A kesha worker -l INFO -c 4
     ```

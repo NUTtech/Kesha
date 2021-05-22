@@ -29,7 +29,7 @@ For more examples, see the official documentation [https://requests.readthedocs.
 
 ### Parsing the request body in json format
 For example, use the preset variable `request_body`.  
-`request_body` is a variable containing a body of the request received by Parrot.
+`request_body` is a variable containing a body of the request received by Kesha.
 ```python
 parsed_data = json.loads(request_body)
 requests.post(

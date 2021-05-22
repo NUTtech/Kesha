@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
 
-  parrot-app:
+  kesha:
     command: bash /app/start-django-dev.sh
     privileged: true
     environment:

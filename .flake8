@@ -90,4 +90,4 @@ exclude =
 
 application-import-names =
   http_stubs,
-  parrot,
+  kesha,

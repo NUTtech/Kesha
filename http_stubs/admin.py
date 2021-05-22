@@ -6,8 +6,8 @@ from django.http import HttpRequest
 
 from http_stubs import models
 
-admin.site.site_title = 'Parrot'
-admin.site.site_header = 'Parrot Admin'
+admin.site.site_title = 'Kesha'
+admin.site.site_header = 'Kesha Admin'
 
 
 @admin.register(models.LogEntry)

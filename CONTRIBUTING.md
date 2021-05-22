@@ -1,7 +1,7 @@
 # How to contribute
 
 ## First steps
-1. Fork [our repo](https://github.com/Uma-Tech/parrot),
+1. Fork [our repo](https://github.com/NUTtech/Kesha),
 here's the [guide on forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo)
 1. [Clone your new repo](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) (forked repo) to have a local copy of the code
 1. Apply the required changes!
@@ -104,5 +104,5 @@ git flow init
     git push origin master develop --follow-tags
     ```
 
-1. [Create](https://github.com/Uma-Tech/parrot/releases/new)
+1. [Create](https://github.com/NUTtech/Kesha/releases/new)
  a new release specifying pushed tag

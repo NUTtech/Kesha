@@ -7,11 +7,11 @@ env = environ.Env()
 BASE_DIR = Path(__file__).parent.parent
 environ.Env.read_env(str(BASE_DIR / '.env'))
 
-SECRET_KEY = env('PARROT_SECRET_KEY')
+SECRET_KEY = env('KESHA_SECRET_KEY')
 
 DEBUG = env.bool('DEBUG', False)
 
-ALLOWED_HOSTS = env.list('PARROT_ALLOWED_HOSTS', default=['127.0.0.1'])
+ALLOWED_HOSTS = env.list('KESHA_ALLOWED_HOSTS', default=['127.0.0.1'])
 
 INSTALLED_APPS = [
     'simpleui',
@@ -42,7 +42,7 @@ if DEBUG:
     INSTALLED_APPS.append('debug_toolbar')
     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
 
-ROOT_URLCONF = 'parrot.urls'
+ROOT_URLCONF = 'kesha.urls'
 
 TEMPLATES = [
     {
@@ -63,10 +63,10 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env.str('PARROT_DB_NAME', 'parrot'),
-        'USER': env.str('PARROT_DB_USER', 'parrot'),
-        'PASSWORD': env.str('PARROT_DB_PASSWORD', 'parrot'),
-        'HOST': env.str('PARROT_DB_HOST', 'parrot-database'),
+        'NAME': env.str('KESHA_DB_NAME', 'kesha'),
+        'USER': env.str('KESHA_DB_USER', 'kesha'),
+        'PASSWORD': env.str('KESHA_DB_PASSWORD', 'kesha'),
+        'HOST': env.str('KESHA_DB_HOST', 'kesha-database'),
     },
 }
 
@@ -107,7 +107,7 @@ SIMPLEUI_HOME_INFO = False
 SIMPLEUI_STATIC_OFFLINE = True
 SIMPLEUI_DEFAULT_THEME = 'layui.css'
 SIMPLEUI_ANALYSIS = False
-SIMPLEUI_LOGO = STATIC_URL + 'parrot_icon.png'
+SIMPLEUI_LOGO = STATIC_URL + 'kesha_icon.png'
 
 SIMPLEUI_ICON = {
     'HTTP Stubs': 'fas fa-feather-alt',
@@ -115,12 +115,12 @@ SIMPLEUI_ICON = {
     'Logs': 'fas fa-layer-group',
 }
 
-INTERNAL_IPS = env.list('PARROT_INTERNAL_HOSTS', default=['127.0.0.1'])
+INTERNAL_IPS = env.list('KESHA_INTERNAL_HOSTS', default=['127.0.0.1'])
 
 # Celery settings
 CELERY_BROKER_URL = env(
-    'PARROT_CELERY_BROKER_URL',
-    default='redis://parrot-celery-broker',
+    'KESHA_CELERY_BROKER_URL',
+    default='redis://kesha-celery-broker',
 )
 CELERY_TASK_TIME_LIMIT = 20
 CELERY_TASK_SOFT_TIME_LIMIT = 10

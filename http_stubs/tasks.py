@@ -12,7 +12,7 @@ from RestrictedPython import (
 from RestrictedPython.Guards import full_write_guard
 
 from http_stubs.models import LogEntry
-from parrot import celery_app
+from kesha import celery_app
 
 restricted_builtins = {'__builtins__': {
     'requests': requests,

@@ -2,7 +2,7 @@ import pytest
 
 from _pytest.fixtures import FixtureFunctionMarker
 
-from parrot import celery_app
+from kesha import celery_app
 
 celery_app.conf['CELERY_ALWAYS_EAGER'] = True
 
