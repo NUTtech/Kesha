@@ -11,6 +11,7 @@ Build:
 ![build](https://github.com/NUTtech/Kesha/workflows/build/badge.svg)
 
 Code quality:
+[![CodeQL](https://github.com/NUTtech/Kesha/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/NUTtech/Kesha/actions/workflows/codeql-analysis.yml)
 [![codecov](https://codecov.io/gh/NUTtech/Kesha/branch/develop/graph/badge.svg?token=788OM63owZ)](https://codecov.io/gh/NUTtech/Kesha)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/NUTtech/Kesha.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/NUTtech/Kesha/context:python)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=NUTtech_Kesha&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=NUTtech_Kesha)
