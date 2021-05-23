@@ -1,6 +1,8 @@
 # Version history
 We follow [Semantic Versions](https://semver.org/).
 
+## 1.2.0 - The parrot's name is now Kesha!
+
 ## 1.1.0 - Disable logs by default
 
 ### Important changes
