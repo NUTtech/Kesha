@@ -42,7 +42,7 @@ var ImagePreview = {
         if (param) {
             $.extend(this.default_params, param);
         }
-        ip_global_img_list = [];
+        var ip_global_img_list = [];
         var id = this.default_params.id;
         if (typeof id == 'string') {
             if ((ip_global_img_list = $("#"+id).find("img")).length == 0) {
