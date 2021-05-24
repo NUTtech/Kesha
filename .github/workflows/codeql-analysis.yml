@@ -2,7 +2,12 @@ name: "CodeQL"
 
 on:
   pull_request:
-    branches: [develop]
+    branches-ignore:
+      - 'dependabot/**'
+
+  push:
+    branches-ignore:
+      - 'dependabot/**'
 
 jobs:
   analyze:
