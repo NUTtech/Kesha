@@ -9,7 +9,7 @@ environ.Env.read_env(str(BASE_DIR / '.env'))
 
 SECRET_KEY = env('KESHA_SECRET_KEY')
 
-DEBUG = env.bool('DEBUG', False)
+DEBUG = env.bool('KESHA_DEBUG', False)
 
 ALLOWED_HOSTS = env.list('KESHA_ALLOWED_HOSTS', default=['127.0.0.1'])
 
