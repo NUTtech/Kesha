@@ -13,6 +13,8 @@ admin.site.site_header = 'Kesha Admin'
 class LogEntryAdminBase(admin.ModelAdmin):
     """Base admin for LogEntry and ProxyLogEntry."""
 
+    change_form_template = 'admin/http_stubs/logentry/change_form.html'
+
     def has_add_permission(self, *args, **kwargs) -> bool:
         """Forbids adding new entries.
 
@@ -46,16 +48,6 @@ class LogEntryAdminBase(admin.ModelAdmin):
 
     pretty_request_body.short_description = 'Jsonify request body'
 
-    def pretty_response_body(self, instance) -> str:
-        """Jsonify the response body if possible.
-
-        :param instance: instance of a log entry
-        :returns: jsonify body
-        """
-        return self.pretty_str(instance.response_body)
-
-    pretty_request_body.short_description = 'Jsonify request body'
-
     list_filter = ('request_date', 'method')
     search_fields = ('path', 'source_ip')
     list_display = ('pk', 'request_date', 'http_stub', 'source_ip')
@@ -63,13 +55,34 @@ class LogEntryAdminBase(admin.ModelAdmin):
         'pk',
         'request_date',
         'http_stub',
+        'source_ip',
+        'result_script',
         'path',
         'method',
-        'source_ip',
         'request_headers',
         'request_body',
         'pretty_request_body',
-        'result_script',
+    )
+
+    fieldsets = (
+        (None, {
+            'fields': (
+                'pk',
+                'request_date',
+                'http_stub',
+                'source_ip',
+                'result_script',
+            )
+        }),
+        ('Request to Kesha', {
+            'fields': (
+                'path',
+                'method',
+                'request_headers',
+                'request_body',
+                'pretty_request_body',
+            ),
+        }),
     )
 
 
@@ -82,12 +95,35 @@ class LogEntryAdmin(LogEntryAdminBase):
 class ProxyLogEntryAdmin(LogEntryAdminBase):
     """Proxy log entries admin."""
 
+    def pretty_response_body(self, instance) -> str:
+        """Jsonify the response body if possible.
+
+        :param instance: instance of a log entry
+        :returns: jsonify body
+        """
+        return self.pretty_str(instance.response_body)
+
+    pretty_response_body.short_description = 'Jsonify response body'
+
     readonly_fields = LogEntryAdminBase.readonly_fields + (
-        'response_date',
+        'target_path',
         'response_latency',
         'response_headers',
         'response_body',
         'pretty_response_body',
+    )
+
+    fieldsets = (
+        *LogEntryAdminBase.fieldsets,
+        ('Response from target endpoint', {
+            'fields': (
+                'target_path',
+                'response_latency',
+                'response_headers',
+                'response_body',
+                'pretty_response_body',
+            ),
+        }),
     )
 
 
@@ -138,3 +174,24 @@ class HTTPStubAdmin(HTTPStubAdminBase):
 @admin.register(models.ProxyHTTPStub)
 class ProxyHTTPStubAdmin(HTTPStubAdminBase):
     """Proxy HTTP stub admin."""
+
+    fieldsets = (
+        (None, {
+            'fields': (
+                'pk',
+                'request_date',
+                'http_stub',
+                'source_ip',
+                'result_script',
+            )
+        }),
+        ('Request to Kesha', {
+            'fields': (
+                'path',
+                'method',
+                'request_headers',
+                'request_body',
+                'pretty_request_body',
+            ),
+        }),
+    )

@@ -105,7 +105,7 @@ STATIC_ROOT = BASE_DIR / Path('static_build')
 # Admin UI settings
 SIMPLEUI_HOME_INFO = False
 SIMPLEUI_STATIC_OFFLINE = True
-SIMPLEUI_DEFAULT_THEME = 'layui.css'
+SIMPLEUI_DEFAULT_THEME = 'dark.green.css'
 SIMPLEUI_ANALYSIS = False
 SIMPLEUI_LOGO = STATIC_URL + 'kesha_icon.png'
 

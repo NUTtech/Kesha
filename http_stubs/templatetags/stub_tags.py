@@ -1,4 +1,4 @@
-import json
+import ast
 from html import unescape
 from typing import AnyStr, Dict, List, Optional
 from urllib.parse import urlunparse
@@ -46,8 +46,8 @@ def headers_to_list(headers: AnyStr) -> List:
     :returns: list of individual headers string representation
     """
     try:
-        headers = json.loads(unescape(headers).replace("'", '"'))
-    except (TypeError, json.JSONDecodeError):
+        headers = ast.literal_eval(unescape(headers))
+    except ValueError:
         return []
     return [
         f'{header}: {header_value}'
