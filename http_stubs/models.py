@@ -109,6 +109,38 @@ class ProxyHTTPStub(AbstractHTTPStub):
     target_url = models.URLField(
         verbose_name='Target url',
     )
+    allow_forward_query = models.BooleanField(
+        verbose_name='Forward query params',
+        default=False,
+    )
+    target_ssl_verify = models.BooleanField(
+        verbose_name='Target SSL verify',
+        default=True,
+    )
+    target_timeout = models.IntegerField(
+        verbose_name='Target response timeout',
+        help_text='In seconds',
+        default=15,
+    )
+    target_method = models.CharField(
+        verbose_name='Target request method',
+        max_length=10,
+        blank=True,
+        null=True,
+        choices=HTTPMethod.choices,
+    )
+    target_headers = HStoreField(
+        verbose_name='Target headers',
+        help_text='In JSON format',
+        default=dict,
+        blank=True,
+    )
+    target_body = models.TextField(
+        verbose_name='Target body',
+        default=None,
+        null=True,
+        blank=True,
+    )
 
     class Meta:
         verbose_name = 'proxy http stub'
@@ -179,13 +211,13 @@ class ProxyLogEntity(AbstractLogEntry):
         related_name='logs',
         on_delete=models.CASCADE,
     )
-    response_date = models.DateTimeField(
-        verbose_name='Response timestamp',
-        help_text='From target',
-        editable=False,
+    target_path = models.URLField(
+        verbose_name='Full target path',
+        max_length=2000,
     )
     response_latency = models.IntegerField(
         verbose_name='Response latency',
+        help_text='In microseconds',
     )
     response_body = models.TextField(
         verbose_name='Response body',
