@@ -43,6 +43,3 @@ We welcome all contributions!
 See [CONTRIBUTING.md](CONTRIBUTING.md) if you want to contribute.  
 You can start with [issues that need some help](https://github.com/NUTtech/Kesha/issues)
 right now.
-
-## Note
-The project was forked from https://github.com/Uma-Tech/parrot version 1.1.0. And this parrot now lives here.
