@@ -4,7 +4,6 @@ from typing import Iterator, KeysView, Tuple
 from django.contrib.postgres.fields import HStoreField
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.db.models import Lookup
 
 
 class HTTPMethod(Enum):
@@ -165,7 +164,7 @@ class LogEntry(models.Model):
 
 
 @models.CharField.register_lookup
-class RegExpLookup(Lookup):
+class RegExpLookup(models.Lookup):
     """Regular expression field lookup.
 
     Here's an example of how to use it:

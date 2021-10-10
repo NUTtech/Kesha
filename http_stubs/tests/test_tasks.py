@@ -7,13 +7,14 @@ from http_stubs.tasks import run_request_script
     'script, expect', (
         # valid scripts
         ('a = 1', 'Done'),
-        ("""
-def func(*args, **kwargs):
-    return json.dumps({'fake': 'data'})
-
-parsed_json = json.loads(func())
-assert parsed_json['fake'] == 'data'
-        """, 'Done'),  # noqa: WPS319
+        (
+            'def func(*args, **kwargs):\n'
+            "    return json.dumps({'fake': 'data'})\n"
+            '\n'
+            'parsed_json = json.loads(func())\n'
+            "assert parsed_json['fake'] == 'data'\n",
+            'Done',
+        ),
 
         # scripts with syntax error
         ('a = no_def', "Error: name 'no_def' is not defined"),
