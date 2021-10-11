@@ -33,7 +33,7 @@ class LogEntryAdminBase(admin.ModelAdmin):
         try:
             body = json.loads(s)
         except json.JSONDecodeError:
-            body = None
+            body = ''
         else:
             body = json.dumps(body, indent=2)
         return body
