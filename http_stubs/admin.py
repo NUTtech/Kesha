@@ -178,20 +178,23 @@ class ProxyHTTPStubAdmin(HTTPStubAdminBase):
     fieldsets = (
         (None, {
             'fields': (
-                'pk',
-                'request_date',
-                'http_stub',
-                'source_ip',
-                'result_script',
+                'is_active',
+                'path',
+                'regex_path',
+                'method',
+                'request_script',
+                'enable_logging',
             )
         }),
-        ('Request to Kesha', {
+        ('Target settings', {
             'fields': (
-                'path',
-                'method',
-                'request_headers',
-                'request_body',
-                'pretty_request_body',
+                'target_url',
+                'allow_forward_query',
+                'target_ssl_verify',
+                'target_timeout',
+                'target_method',
+                'target_headers',
+                'target_body',
             ),
         }),
     )

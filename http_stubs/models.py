@@ -46,6 +46,11 @@ class AbstractHTTPStub(models.Model):
         help_text='Language: python 3.8. The script will run on each request.',
         blank=True,
     )
+    enable_logging = models.BooleanField(
+        verbose_name='Logging',
+        help_text='Enables logging of requests',
+        default=False,
+    )
 
     def __str__(self):
         """Return string representation of the model.
@@ -66,11 +71,6 @@ class AbstractHTTPStub(models.Model):
 class HTTPStub(AbstractHTTPStub):
     """HTTP stub."""
 
-    enable_logging = models.BooleanField(
-        verbose_name='Logging',
-        help_text='Enables logging of requests',
-        default=False,
-    )
     resp_delay = models.PositiveIntegerField(
         verbose_name='Response delay',
         help_text='In milliseconds',
