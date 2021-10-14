@@ -3,6 +3,9 @@ from typing import Tuple
 from django.db import models
 
 
+__all__ = ['RegExpLookup']
+
+
 @models.CharField.register_lookup
 class RegExpLookup(models.Lookup):
     """Regular expression field lookup.
