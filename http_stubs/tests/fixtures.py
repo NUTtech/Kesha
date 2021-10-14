@@ -47,9 +47,9 @@ def log_entity_factory(http_stub_factory) -> Callable:  # noqa: WPS442
             'path': http_stub.path,
             'method': http_stub.method,
             'source_ip': '127.0.0.1',
-            'date': 1608757075,
-            'body': '',
-            'headers': {},
+            'request_date': 1608757075,
+            'request_body': '',
+            'request_headers': {},
             'http_stub': http_stub,
             'result_script': '',
         }
