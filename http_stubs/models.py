@@ -1,5 +1,3 @@
-from typing import Tuple
-
 from django.contrib.postgres.fields import HStoreField
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -52,13 +50,6 @@ class AbstractHTTPStub(models.Model):
         default=False,
     )
 
-    def __str__(self):
-        """Return string representation of the model.
-
-        :returns: e.g. `get: /test/`.
-        """
-        return f'{self.method}: {self.path}'
-
     class Meta:
         abstract = True
         constraints = [
@@ -66,6 +57,13 @@ class AbstractHTTPStub(models.Model):
                 fields=('path', 'method'), name='uniq-path-method',
             ),
         ]
+
+    def __str__(self):
+        """Return string representation of the model.
+
+        :returns: e.g. `get: /test/`.
+        """
+        return f'{self.method}: {self.path}'
 
 
 class HTTPStub(AbstractHTTPStub):
@@ -125,8 +123,8 @@ class ProxyHTTPStub(AbstractHTTPStub):
     target_method = models.CharField(
         verbose_name='Target request method',
         max_length=10,
+        default='',
         blank=True,
-        null=True,
         choices=HTTPMethod.choices,
     )
     target_headers = HStoreField(
@@ -137,8 +135,7 @@ class ProxyHTTPStub(AbstractHTTPStub):
     )
     target_body = models.TextField(
         verbose_name='Target body',
-        default=None,
-        null=True,
+        default='',
         blank=True,
     )
 
@@ -178,6 +175,10 @@ class AbstractLogEntry(models.Model):
         max_length=200,
         blank=True,
     )
+
+    class Meta:
+        verbose_name = 'MUST BE DEFINED'
+        verbose_name_plural = 'MUST BE DEFINED'
 
     def __str__(self) -> str:
         """Return string representation of the model.
@@ -231,27 +232,3 @@ class ProxyLogEntity(AbstractLogEntry):
     class Meta:
         verbose_name = 'proxy log'
         verbose_name_plural = 'proxy logs'
-
-
-@models.CharField.register_lookup
-class RegExpLookup(models.Lookup):
-    """Regular expression field lookup.
-
-    Here's an example of how to use it:
-    ```
-    HTTPStub.objects.filter(path__match='/path/to/target/')
-    ```
-    """
-
-    lookup_name = 'match'
-
-    def as_postgresql(self, compiler, connection) -> Tuple[str, list]:
-        """Compiles request for postgres.
-
-        :param compiler: sql expression compiler
-        :param connection: database connection
-        :return: generated expression with params
-        """
-        lhs, lhs_params = self.process_lhs(compiler, connection)
-        rhs, rhs_params = self.process_rhs(compiler, connection)
-        return f'{rhs} ~ {lhs}', lhs_params + rhs_params

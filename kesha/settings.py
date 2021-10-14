@@ -109,11 +109,13 @@ SIMPLEUI_DEFAULT_THEME = 'dark.green.css'
 SIMPLEUI_ANALYSIS = False
 SIMPLEUI_LOGO = STATIC_URL + 'kesha_icon.png'
 
+STUB_ICON = 'fas fa-feather-alt'
+
 SIMPLEUI_ICON = {
-    'HTTP Stubs': 'fas fa-feather-alt',
-    'Request stubs': 'fas fa-feather-alt',
+    'HTTP Stubs': STUB_ICON,
+    'Request stubs': STUB_ICON,
     'Request logs': 'fas fa-layer-group',
-    'Proxy stubs': 'fas fa-feather-alt',
+    'Proxy stubs': STUB_ICON,
     'Proxy logs': 'fas fa-layer-group',
 }
 

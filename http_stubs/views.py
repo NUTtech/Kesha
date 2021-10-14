@@ -1,10 +1,11 @@
 from time import sleep
-from typing import Optional, Union, Tuple, Dict, Callable, Any
+from typing import Optional, Tuple, Union
 
 import requests
 from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
+from frozendict import frozendict
 
 from http_stubs.models import HTTPStub, LogEntry, ProxyHTTPStub, ProxyLogEntity
 from http_stubs.tasks import run_request_script
@@ -31,6 +32,8 @@ def _httpstub_executor(
     for header_name, header_value in stub.resp_headers.items():
         response[header_name] = header_value
 
+    result_script = 'Was launched' if stub.request_script else ''
+
     log = LogEntry.objects.create(
         path=request.build_absolute_uri(),
         method=request.method,
@@ -38,13 +41,13 @@ def _httpstub_executor(
         request_headers=dict(request.headers),
         request_body=request.body.decode('utf-8'),
         http_stub=stub,
-        result_script='Was launched' if stub.request_script else '',
+        result_script=result_script,
     ) if stub.enable_logging else None
 
     return response, log
 
 
-def _proxy_httpstub_executor(
+def _proxy_httpstub_executor(  # noqa: WPS210
     stub: ProxyHTTPStub,
     request: HttpRequest,
 ) -> Tuple[HttpResponse, Optional[LogEntry]]:
@@ -54,14 +57,14 @@ def _proxy_httpstub_executor(
     :param request: received request
     :returns: a response instance for return to requester
     """
-    t_request_args = dict(
-        method=request.method,
-        url=stub.target_url,
-        headers=request.headers,
-        data=request.body,
-        verify=stub.target_ssl_verify,
-        timeout=stub.target_timeout,
-    )
+    t_request_args = {
+        'method': request.method,
+        'url': stub.target_url,
+        'headers': request.headers,
+        'data': request.body,
+        'verify': stub.target_ssl_verify,
+        'timeout': stub.target_timeout,
+    }
     if stub.allow_forward_query and (request.GET or request.POST):
         t_request_args['params'] = request.GET or request.POST
     if stub.target_method:
@@ -99,10 +102,10 @@ def _proxy_httpstub_executor(
     return response, log
 
 
-STUB_EXEC_MAP = {
+STUB_EXEC_MAP = frozendict({
     HTTPStub: _httpstub_executor,
     ProxyHTTPStub: _proxy_httpstub_executor,
-}
+})
 
 
 class HTTPStubView(View):
@@ -112,6 +115,32 @@ class HTTPStubView(View):
     Creates a LogEntry and sends a response from the stub if stub is found.
     Returns 404 if stub is not found.
     """
+
+    stub_exec_map = dict(STUB_EXEC_MAP)
+
+    @csrf_exempt
+    def dispatch(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+        """Process incoming request.
+
+        :param request: incoming http request
+        :param args: request args
+        :param kwargs: request kwargs
+        :returns: http response
+        """
+        stub = self._find_stub(request.method, request.get_full_path())
+        if not stub:
+            return HttpResponseNotFound()
+
+        response, log = self.stub_exec_map[stub.__class__](stub, request)
+
+        if stub.request_script:
+            run_request_script.delay(
+                script=stub.request_script,
+                request_body=request.body.decode('utf-8'),
+                log_id=log.pk if log else None,
+            )
+
+        return response
 
     def _find_stub(
         self,
@@ -134,35 +163,11 @@ class HTTPStubView(View):
             if stub:
                 return stub
 
-        for model in stub_models:
-            stub = model.objects.exclude(regex_path=False).filter(
+        for s_model in stub_models:
+            stub = s_model.objects.exclude(regex_path=False).filter(
                 method=method, path__match=path,
             ).first()
             if stub:
                 return stub
 
         return None
-
-    @csrf_exempt
-    def dispatch(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
-        """Process incoming request.
-
-        :param request: incoming http request
-        :param args: request args
-        :param kwargs: request kwargs
-        :returns: http response
-        """
-        stub = self._find_stub(request.method, request.get_full_path())
-        if not stub:
-            return HttpResponseNotFound()
-
-        response, log = STUB_EXEC_MAP[stub.__class__](stub, request)
-
-        if stub.request_script:
-            run_request_script.delay(
-                script=stub.request_script,
-                request_body=request.body.decode('utf-8'),
-                log_id=log.pk if log else None,
-            )
-
-        return response
