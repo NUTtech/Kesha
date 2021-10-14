@@ -16,7 +16,7 @@ class RegExpLookup(models.Lookup):
     lookup_name = 'match'
 
     # lookup only works with PostgreSQL
-    def as_sql(self, compiler, connection):
+    def as_sql(self, compiler, connection) -> Tuple[str, list]:  # noqa: D102
         raise NotImplementedError
 
     def as_postgresql(self, compiler, connection) -> Tuple[str, list]:
