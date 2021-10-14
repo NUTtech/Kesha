@@ -24,14 +24,14 @@ class LogEntryAdminBase(admin.ModelAdmin):
         """
         return False
 
-    def pretty_str(self, s: str) -> str:
+    def pretty_str(self, string: str) -> str:
         """Jsonify a string if possible.
 
-        :param s: a string
+        :param string: a string
         :returns: jsonify string
         """
         try:
-            body = json.loads(s)
+            body = json.loads(string)
         except json.JSONDecodeError:
             body = ''
         else:
@@ -72,7 +72,7 @@ class LogEntryAdminBase(admin.ModelAdmin):
                 'http_stub',
                 'source_ip',
                 'result_script',
-            )
+            ),
         }),
         ('Request to Kesha', {
             'fields': (
@@ -184,7 +184,7 @@ class ProxyHTTPStubAdmin(HTTPStubAdminBase):
                 'method',
                 'request_script',
                 'enable_logging',
-            )
+            ),
         }),
         ('Target settings', {
             'fields': (
