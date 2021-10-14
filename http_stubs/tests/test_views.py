@@ -72,13 +72,13 @@ class TestHTTPStubView:
             return date.strftime('%d%m%y')  # noqa:WPS323
 
         assert log.source_ip == '127.0.0.1'
-        assert _datefmt(log.date) == _datefmt(datetime(2020, 5, 25))
-        assert log.headers == {
+        assert _datefmt(log.request_date) == _datefmt(datetime(2020, 5, 25))
+        assert log.request_headers == {
             'Content-Length': '4',
             'Content-Type': content_type,
             'Cookie': '',
         }
-        assert log.body == 'test'
+        assert log.request_body == 'test'
         assert log.http_stub == http_stub
         assert log.method == HTTPMethod.POST.name
         assert log.path == f'http://testserver{request_path}'
