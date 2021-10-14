@@ -21,8 +21,10 @@ ignore =
   WPS115,
   ; f-string missing prefix
   FS003,
-  ; f-string missing prefix
+  ; Found a too complex `f` string
   WPS237,
+  ; Found wrong metadata variable
+  WPS410,
 
 per-file-ignores =
   ; all tests
