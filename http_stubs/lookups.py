@@ -2,7 +2,6 @@ from typing import Tuple
 
 from django.db import models
 
-
 __all__ = ['RegExpLookup']
 
 
