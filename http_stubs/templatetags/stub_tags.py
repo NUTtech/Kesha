@@ -47,7 +47,7 @@ def headers_to_list(headers: AnyStr) -> List:
     """
     try:
         headers = ast.literal_eval(unescape(headers))
-    except ValueError:
+    except (ValueError, SyntaxError):
         return []
     return [
         f'{header}: {header_value}'

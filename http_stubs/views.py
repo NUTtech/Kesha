@@ -5,7 +5,6 @@ import requests
 from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
-from frozendict import frozendict
 
 from http_stubs.models import HTTPStub, LogEntry, ProxyHTTPStub, ProxyLogEntity
 from http_stubs.tasks import run_request_script
@@ -102,12 +101,6 @@ def _proxy_httpstub_executor(  # noqa: WPS210
     return response, log
 
 
-STUB_EXEC_MAP = frozendict({
-    HTTPStub: _httpstub_executor,
-    ProxyHTTPStub: _proxy_httpstub_executor,
-})
-
-
 class HTTPStubView(View):
     """HTTP stub view.
 
@@ -116,7 +109,10 @@ class HTTPStubView(View):
     Returns 404 if stub is not found.
     """
 
-    stub_exec_map = dict(STUB_EXEC_MAP)
+    stub_exec_map = {
+        HTTPStub: _httpstub_executor,
+        ProxyHTTPStub: _proxy_httpstub_executor,
+    }
 
     @csrf_exempt
     def dispatch(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
