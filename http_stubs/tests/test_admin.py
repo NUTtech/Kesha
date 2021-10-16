@@ -27,7 +27,11 @@ class TestLogEntryAdminBase:
         ),
     )
     def test_pretty_str(self, string, expect):
-        """Test pretty_str method."""
+        """Test pretty_str method.
+
+        :param string: a string for check
+        :param expect: expect value for the string
+        """
         assert self.instance.pretty_str(string) == expect
 
     def test_pretty_request_body(self):
@@ -55,7 +59,10 @@ class TestHTTPStubAdminBase:
     instance = HTTPStubAdminBase(HTTPStub, '')
 
     def test_enable_action(self, http_stub_factory):
-        """Test for enable_action method."""
+        """Test for enable_action method.
+
+        :param http_stub_factory: factory for HTTPStubs
+        """
         stub = http_stub_factory(is_active=False)
         self.instance.enable_action(HttpRequest(), HTTPStub.objects.all())
         stub.refresh_from_db()
@@ -63,7 +70,10 @@ class TestHTTPStubAdminBase:
         assert stub.is_active is True
 
     def test_disable_action(self, http_stub_factory):
-        """Test for disable_action method."""
+        """Test for disable_action method.
+
+        :param http_stub_factory: factory for HTTPStubs
+        """
         stub = http_stub_factory(is_active=True)
         self.instance.disable_action(HttpRequest(), HTTPStub.objects.all())
         stub.refresh_from_db()
