@@ -12,7 +12,6 @@ omit =
     */.local/*
     */tests/*
     conftest.py
-    */admin.py
     */urls.py
 
 [report]
