@@ -2,9 +2,11 @@ import pytest
 from django.http import HttpRequest
 
 from http_stubs.admin import (
-    LogEntryAdminBase, ProxyLogEntryAdmin, HTTPStubAdminBase,
+    HTTPStubAdminBase,
+    LogEntryAdminBase,
+    ProxyLogEntryAdmin,
 )
-from http_stubs.models import LogEntry, ProxyLogEntity, HTTPStub
+from http_stubs.models import HTTPStub, LogEntry, ProxyLogEntity
 
 
 class TestLogEntryAdminBase:
