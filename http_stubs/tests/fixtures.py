@@ -2,9 +2,7 @@ from typing import Callable
 
 import pytest
 
-from http_stubs.models import (
-    HTTPMethod, HTTPStub, LogEntry, ProxyHTTPStub, ProxyLogEntity,
-)
+from http_stubs.models import HTTPMethod, HTTPStub, LogEntry, ProxyHTTPStub
 
 
 @pytest.fixture

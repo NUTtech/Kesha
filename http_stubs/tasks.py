@@ -43,9 +43,9 @@ def run_request_script(
 
     loc = {'request_body': request_body, **restricted_builtins}
 
-    try:
+    try:  # noqa: WPS229
         byte_code = compile_restricted(script)
-        exec(byte_code, loc, None)
+        exec(byte_code, loc, None)  # noqa: S102, WPS421
     except SoftTimeLimitExceeded:
         log_msg = 'Error: Execution time limit exceeded'
     except Exception as err:

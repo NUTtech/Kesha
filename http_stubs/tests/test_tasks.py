@@ -53,7 +53,11 @@ def test_run_without_log(script):
 
 @patch('http_stubs.tasks.compile_restricted')
 def test_run_request_script_time_limit(compile_restricted, log_entity_factory):
-    """Test SoftTimeLimitExceeded Exception in run_request_script."""
+    """Test SoftTimeLimitExceeded Exception in run_request_script.
+
+    :param compile_restricted: patched compile_restricted func
+    :param log_entity_factory: factory log models
+    """
     compile_restricted.side_effect = SoftTimeLimitExceeded
     log = log_entity_factory()
     run_request_script.delay(script='', request_body='', log_id=log.id)
