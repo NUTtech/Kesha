@@ -245,7 +245,4 @@ class TestHTTPStubView:
         assert log.target_path == fake_response.request.url
         assert log.response_latency == 0
         assert log.response_body == 'I am a teapot'
-        assert log.response_headers == {
-            'Content-Type': 'text/plain',
-            'TEST_RESPONSE_HEADER': '1',
-        }
+        assert log.response_headers == fake_response.headers
