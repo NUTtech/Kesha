@@ -2,7 +2,9 @@ from typing import Callable
 
 import pytest
 
-from http_stubs.models import HTTPMethod, HTTPStub, LogEntry
+from http_stubs.models import (
+    HTTPMethod, HTTPStub, LogEntry, ProxyHTTPStub, ProxyLogEntity,
+)
 
 
 @pytest.fixture
@@ -27,6 +29,29 @@ def http_stub_factory() -> Callable:
 
 
 @pytest.fixture
+def proxy_http_stub_factory() -> Callable:
+    """Proxy HTTP stubs factory.
+
+    :returns: factory closure
+    """
+    def factory(**kwargs) -> ProxyHTTPStub:
+        """Create and return ProxyHTTPStub object.
+
+        :param kwargs: model params
+        :return: created stub
+        """
+        default_params = {
+            'path': '/default_proxy_path/',
+            'target_url': '',
+            'method': HTTPMethod.GET.name,
+            'target_method': HTTPMethod.GET.name,
+        }
+        default_params.update(kwargs)
+        return ProxyHTTPStub.objects.create(**default_params)
+    return factory
+
+
+@pytest.fixture
 def log_entity_factory(http_stub_factory) -> Callable:  # noqa: WPS442
     """Log Entity factory.
 
@@ -34,15 +59,12 @@ def log_entity_factory(http_stub_factory) -> Callable:  # noqa: WPS442
     :returns: factory closure
     """
     def factory(**kwargs) -> LogEntry:
-        """Create and return HTTPStub object.
+        """Create and return LogEntry object.
 
         :param kwargs: model params
         :return: created stub
         """
-        http_stub: HTTPStub = kwargs.get('http_stub') or http_stub_factory(
-            path='/default_path/',
-            method=HTTPMethod.GET.name,
-        )
+        http_stub: HTTPStub = kwargs.get('http_stub') or http_stub_factory()
         default_params = {
             'path': http_stub.path,
             'method': http_stub.method,
