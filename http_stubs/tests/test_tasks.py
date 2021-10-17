@@ -1,4 +1,7 @@
+from unittest.mock import patch
+
 import pytest
+from billiard.exceptions import SoftTimeLimitExceeded
 
 from http_stubs.tasks import run_request_script
 
@@ -46,3 +49,13 @@ def test_run_without_log(script):
     :param script: a request script
     """
     run_request_script.run(script=script, request_body='')
+
+
+@patch('http_stubs.tasks.compile_restricted')
+def test_run_request_script_time_limit(compile_restricted, log_entity_factory):
+    """Test SoftTimeLimitExceeded Exception in run_request_script."""
+    compile_restricted.side_effect = SoftTimeLimitExceeded
+    log = log_entity_factory()
+    run_request_script.delay(script='', request_body='', log_id=log.id)
+    log.refresh_from_db()
+    assert log.result_script == 'Error: Execution time limit exceeded'
