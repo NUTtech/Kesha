@@ -3,11 +3,11 @@ from http import HTTPStatus
 from unittest.mock import patch
 
 import pytest
-from django.http import HttpRequest, HttpResponse
-from requests import Response, Request
+from django.http import HttpRequest
+from requests import Request, Response
 
+from http_stubs import views
 from http_stubs.models import HTTPMethod, LogEntry
-from http_stubs.views import _proxy_httpstub_executor
 
 
 class TestHTTPStubView:
@@ -177,6 +177,11 @@ class TestHTTPStubView:
         mock_request_func,
         proxy_http_stub_factory,
     ):
+        """Test for _proxy_httpstub_executor fync.
+
+        :param mock_request_func: patched request func
+        :param proxy_http_stub_factory: factory proxy stubs
+        """
         request = HttpRequest()
         request.method = HTTPMethod.OPTIONS.name
         request.path = '127.0.0.1/test_request_path'
@@ -197,7 +202,7 @@ class TestHTTPStubView:
 
         # test without additional params
         stub = proxy_http_stub_factory(target_url='test_target_url')
-        _, _ = _proxy_httpstub_executor(stub, request)
+        views._proxy_httpstub_executor(stub, request)
 
         call_args = mock_request_func.call_args.kwargs
         assert call_args['method'] == HTTPMethod.GET.name
@@ -215,7 +220,7 @@ class TestHTTPStubView:
             target_headers={'test_target_header': 1},
         )
 
-        response, log = _proxy_httpstub_executor(stub, request)
+        response, log = views._proxy_httpstub_executor(stub, request)
 
         log.refresh_from_db()
 
