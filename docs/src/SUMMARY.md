@@ -7,6 +7,7 @@
     - [Local run](quick-start/local-run.md)
 - [Usage](usage/index.md)
     - [First steps](usage/first-steps.md)
+    - [Proxy stubs](usage/proxy-stubs.md)
     - [Request scripts](usage/request-scripts.md)
 - [Changelog](changelog.md)
 - [Contributing](contributing.md)
