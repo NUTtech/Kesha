@@ -123,8 +123,6 @@ class ProxyHTTPStub(AbstractHTTPStub):
     target_method = models.CharField(
         verbose_name='Target request method',
         max_length=10,
-        default='',
-        blank=True,
         choices=HTTPMethod.choices,
     )
     target_headers = HStoreField(

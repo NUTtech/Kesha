@@ -49,7 +49,7 @@ def _httpstub_executor(
 def _proxy_httpstub_executor(  # noqa: WPS210
     stub: ProxyHTTPStub,
     request: HttpRequest,
-) -> Tuple[HttpResponse, Optional[LogEntry]]:
+) -> Tuple[HttpResponse, Optional[ProxyLogEntity]]:
     """Execute logic for ProxyHTTPStub instance.
 
     :param stub: a proxy stub instance
@@ -66,12 +66,12 @@ def _proxy_httpstub_executor(  # noqa: WPS210
     }
     if stub.allow_forward_query and (request.GET or request.POST):
         t_request_args['params'] = request.GET or request.POST
-    if stub.target_method:
-        t_request_args['method'] = stub.target_method
     if stub.target_headers:
         t_request_args['headers'] = stub.target_headers
-    if stub.target_body is not None:
+    if stub.target_body:
         t_request_args['data'] = stub.target_body
+
+    t_request_args['method'] = stub.target_method
 
     t_response = requests.request(**t_request_args)
 
