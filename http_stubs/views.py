@@ -1,5 +1,6 @@
 from time import sleep
 from typing import Optional, Tuple, Union
+from wsgiref.util import is_hop_by_hop
 
 import requests
 from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
@@ -59,7 +60,6 @@ def _proxy_httpstub_executor(  # noqa: WPS210
     t_request_args = {
         'method': request.method,
         'url': stub.target_url,
-        'headers': request.headers,
         'data': request.body,
         'verify': stub.target_ssl_verify,
         'timeout': stub.target_timeout,
@@ -82,6 +82,9 @@ def _proxy_httpstub_executor(  # noqa: WPS210
     )
 
     for header_name, header_value in t_response.headers.items():
+        # skip if header not support in wsgi
+        if is_hop_by_hop(header_name):
+            continue
         response[header_name] = header_value
 
     log = ProxyLogEntity.objects.create(

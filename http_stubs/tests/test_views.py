@@ -195,6 +195,8 @@ class TestHTTPStubView:
         fake_response = Response()
         fake_response.headers['TEST_RESPONSE_HEADER'] = '1'
         fake_response.headers['Content-Type'] = 'text/plain'
+        # not supported wsgi header
+        fake_response.headers['Trailers'] = 'value'
         fake_response._content = b'I am a teapot'
         fake_response.status_code = 418
         fake_response.request = Request(url='target_url')
@@ -207,7 +209,6 @@ class TestHTTPStubView:
         call_args = mock_request_func.call_args.kwargs
         assert call_args['method'] == HTTPMethod.GET.name
         assert call_args['url'] == stub.target_url
-        assert call_args['headers']['Test-Header'] == 'Value'
         assert call_args['data'] == request._body
         assert call_args['verify'] is True
         assert call_args['timeout'] == 15
