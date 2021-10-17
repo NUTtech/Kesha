@@ -1,10 +1,10 @@
 {{#include ../../README.md}}
 
 ## Screenshots
-![](./images/01.jpg)
+![](./images/home.jpg)
   
-![](./images/02.jpg)
+![](./images/request_logs.jpg)
   
-![](./images/03.jpg)
+![](./images/request_stubs.jpg)
   
-![](./images/04.jpg)
+![](./images/request_stub_add.jpg)
