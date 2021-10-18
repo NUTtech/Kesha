@@ -175,6 +175,7 @@ class AbstractLogEntry(models.Model):
     )
 
     class Meta:
+        abstract = True
         verbose_name = 'MUST BE DEFINED'
         verbose_name_plural = 'MUST BE DEFINED'
 
