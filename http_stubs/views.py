@@ -82,7 +82,7 @@ def _proxy_httpstub_executor(  # noqa: WPS210
     )
 
     for header_name, header_value in t_response.headers.items():
-        # skip if header not support in wsgi
+        # skip headers which are meaningful only for a single transport-level connection
         if is_hop_by_hop(header_name):
             continue
         response[header_name] = header_value
