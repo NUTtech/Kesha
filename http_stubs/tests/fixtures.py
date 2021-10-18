@@ -6,7 +6,7 @@ from http_stubs.models import HTTPMethod, HTTPStub, LogEntry, ProxyHTTPStub
 
 
 @pytest.fixture
-def http_stub_factory() -> Callable:
+def http_stub_factory() -> Callable[..., HTTPStub]:
     """HTTP stubs factory.
 
     :returns: factory closure
@@ -27,7 +27,7 @@ def http_stub_factory() -> Callable:
 
 
 @pytest.fixture
-def proxy_http_stub_factory() -> Callable:
+def proxy_http_stub_factory() -> Callable[..., ProxyHTTPStub]:
     """Proxy HTTP stubs factory.
 
     :returns: factory closure
@@ -50,7 +50,9 @@ def proxy_http_stub_factory() -> Callable:
 
 
 @pytest.fixture
-def log_entity_factory(http_stub_factory) -> Callable:  # noqa: WPS442
+def log_entity_factory(
+    http_stub_factory,  # noqa: WPS442
+) -> Callable[..., LogEntry]:
     """Log Entity factory.
 
     :param http_stub_factory: a factory for create a HttpStub
