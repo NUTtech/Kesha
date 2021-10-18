@@ -217,7 +217,7 @@ class ProxyLogEntity(AbstractLogEntry):
     )
     response_latency = models.IntegerField(
         verbose_name='Response latency',
-        help_text='In microseconds',
+        help_text='In milliseconds',
     )
     response_body = models.TextField(
         verbose_name='Response body',
