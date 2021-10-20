@@ -258,9 +258,14 @@ class TestHTTPStubView:
     ),
 )
 def test_request_body_decode(body, encoding, expect):
-    """Test for _request_body_decode func."""
-    r = HttpRequest()
+    """Test for _request_body_decode func.
 
-    r._body = body
-    r._encoding = encoding
-    assert views._request_body_decode(r) == expect
+    :param body: request body
+    :param encoding: request encoding
+    :param expect: expecting result
+    """
+    request = HttpRequest()
+
+    request._body = body
+    request._encoding = encoding
+    assert views._request_body_decode(request) == expect
