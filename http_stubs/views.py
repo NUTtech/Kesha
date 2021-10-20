@@ -12,7 +12,11 @@ from http_stubs.tasks import run_request_script
 
 
 def _request_body_decode(request: HttpRequest) -> str:
-    """Decode a request body or return empty string."""
+    """Decode a request body.
+
+    :param request: a http request for getting decoded body
+    :returns: decoded body or empty string
+    """
     try:
         return request.body.decode(request.encoding or 'utf-8')
     except ValueError:
