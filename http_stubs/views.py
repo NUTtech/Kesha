@@ -11,6 +11,14 @@ from http_stubs.models import HTTPStub, LogEntry, ProxyHTTPStub, ProxyLogEntity
 from http_stubs.tasks import run_request_script
 
 
+def _request_body_decode(request: HttpRequest) -> str:
+    """Decode a request body or return empty string."""
+    try:
+        return request.body.decode(request.encoding or 'utf-8')
+    except ValueError:
+        return ''
+
+
 def _httpstub_executor(
     stub: HTTPStub,
     request: HttpRequest,
@@ -39,7 +47,7 @@ def _httpstub_executor(
         method=request.method,
         source_ip=request.META['REMOTE_ADDR'],
         request_headers=dict(request.headers),
-        request_body=request.body.decode('utf-8'),
+        request_body=_request_body_decode(request),
         http_stub=stub,
         result_script=result_script,
     ) if stub.enable_logging else None
@@ -94,7 +102,7 @@ def _proxy_httpstub_executor(  # noqa: WPS210
         method=request.method,
         source_ip=request.META['REMOTE_ADDR'],
         request_headers=dict(request.headers),
-        request_body=request.body.decode('utf-8'),
+        request_body=_request_body_decode(request),
         result_script='Was launched' if stub.request_script else '',
         target_path=t_response.request.url,
         response_latency=t_response.elapsed.microseconds,
@@ -136,7 +144,7 @@ class HTTPStubView(View):
         if stub.request_script:
             run_request_script.delay(
                 script=stub.request_script,
-                request_body=request.body.decode('utf-8'),
+                request_body=_request_body_decode(request),
                 log_id=log.pk if log else None,
             )
 
