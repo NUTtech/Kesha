@@ -247,3 +247,20 @@ class TestHTTPStubView:
         assert log.response_latency == 0
         assert log.response_body == 'I am a teapot'
         assert log.response_headers == fake_response.headers
+
+
+@pytest.mark.parametrize(
+    'body, encoding, expect', (
+        (b'test_body', '', 'test_body'),
+        (b'', '', ''),
+        ('тестовое тело'.encode('koi8-r'), '', ''),
+        ('тестовое тело'.encode('koi8-r'), 'koi8-r', 'тестовое тело'),
+    ),
+)
+def test_request_body_decode(body, encoding, expect):
+    """Test for _request_body_decode func."""
+    r = HttpRequest()
+
+    r._body = body
+    r._encoding = encoding
+    assert views._request_body_decode(r) == expect
