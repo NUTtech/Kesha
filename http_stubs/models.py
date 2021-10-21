@@ -154,6 +154,10 @@ class AbstractLogEntry(models.Model):
         max_length=10,
         choices=HTTPMethod.choices,
     )
+    resp_status = models.IntegerField(
+        verbose_name='Response status',
+        validators=(MinValueValidator(0), MaxValueValidator(600)),
+    )
     source_ip = models.GenericIPAddressField(
         verbose_name='Source IP',
     )

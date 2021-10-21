@@ -74,6 +74,7 @@ def log_entity_factory(
             'request_headers': {},
             'http_stub': http_stub,
             'result_script': '',
+            'resp_status': 418,
         }
         default_params.update(kwargs)
         return LogEntry.objects.create(**default_params)
