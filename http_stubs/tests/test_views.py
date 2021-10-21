@@ -58,6 +58,7 @@ class TestHTTPStubView:
             regex_path=True,
             request_script='a = 1',
             enable_logging=True,
+            resp_status=401,
         )
 
         request_path = f'/regex/?query={"search" * 300}'
@@ -87,6 +88,7 @@ class TestHTTPStubView:
         assert log.method == HTTPMethod.POST.name
         assert log.path == f'http://testserver{request_path}'
         assert log.result_script == 'Done'
+        assert log.resp_status == http_stub.resp_status
 
     def test_empty_log(self, http_stub_factory, client):
         """Tests http stub without logs.
@@ -198,7 +200,7 @@ class TestHTTPStubView:
         # not supported wsgi header
         fake_response.headers['Trailers'] = 'value'
         fake_response._content = b'I am a teapot'
-        fake_response.status_code = 418
+        fake_response.status_code = 420
         fake_response.request = Request(url='target_url')
         mock_request_func.return_value = fake_response
 
@@ -247,6 +249,7 @@ class TestHTTPStubView:
         assert log.response_latency == 0
         assert log.response_body == 'I am a teapot'
         assert log.response_headers == fake_response.headers
+        assert log.resp_status == fake_response.status_code
 
 
 @pytest.mark.parametrize(

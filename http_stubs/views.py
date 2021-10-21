@@ -54,6 +54,7 @@ def _httpstub_executor(
         request_body=_request_body_decode(request),
         http_stub=stub,
         result_script=result_script,
+        resp_status=stub.resp_status,
     ) if stub.enable_logging else None
 
     return response, log
@@ -112,6 +113,7 @@ def _proxy_httpstub_executor(  # noqa: WPS210
         response_latency=t_response.elapsed.microseconds,
         response_body=t_response.text,
         response_headers=dict(t_response.headers),
+        resp_status=t_response.status_code,
     )
 
     return response, log
