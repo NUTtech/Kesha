@@ -42,8 +42,9 @@ def run_request_script(
         log = LogEntry.objects.get(pk=log_id)
 
     loc = {'request_body': request_body, **restricted_builtins}
-    byte_code = compile_restricted(script)
-    try:
+
+    try:  # noqa: WPS229
+        byte_code = compile_restricted(script)
         exec(byte_code, loc, None)  # noqa: S102, WPS421
     except SoftTimeLimitExceeded:
         log_msg = 'Error: Execution time limit exceeded'

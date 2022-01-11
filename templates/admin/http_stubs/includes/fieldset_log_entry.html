@@ -1,12 +1,12 @@
 {% extends 'admin/http_stubs/includes/fieldset.html' %}
 {% load stub_tags %}
 {% block readonly_field %}
-    {% if field.field.name == 'headers' %}
+    {% if field.field.name in 'request_headers,response_headers' %}
         <ul class="readonly">
             {% for header in field.contents|headers_to_list %}
                 <li>{{ header }}</li>
             {% endfor %}</ul>
-    {% elif field.field.name == 'pretty_body' %}
+    {% elif field.field.name in 'pretty_request_body,pretty_response_body' %}
         <div class="readonly">
             <pre>{{ field.contents }}</pre>
         </div>

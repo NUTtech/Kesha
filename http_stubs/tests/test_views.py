@@ -1,15 +1,19 @@
 from datetime import datetime
 from http import HTTPStatus
+from unittest.mock import patch
 
 import pytest
+from django.http import HttpRequest
+from requests import Request, Response
 
+from http_stubs import views
 from http_stubs.models import HTTPMethod, LogEntry
 
 
 class TestHTTPStubView:
     """Tests representation of the http stubs."""
 
-    @pytest.mark.parametrize('method', HTTPMethod.names())
+    @pytest.mark.parametrize('method', HTTPMethod.values)
     def test_nonexistent_stub(self, method: str, client):
         """Tests response when stub is not found.
 
@@ -22,7 +26,7 @@ class TestHTTPStubView:
 
         assert response.status_code == HTTPStatus.NOT_FOUND
 
-    @pytest.mark.parametrize('method', HTTPMethod.names())
+    @pytest.mark.parametrize('method', HTTPMethod.values)
     def test_exist_not_regexp_stub(
         self, method: str, http_stub_factory, client,
     ):
@@ -54,6 +58,7 @@ class TestHTTPStubView:
             regex_path=True,
             request_script='a = 1',
             enable_logging=True,
+            resp_status=401,
         )
 
         request_path = f'/regex/?query={"search" * 300}'
@@ -72,17 +77,18 @@ class TestHTTPStubView:
             return date.strftime('%d%m%y')  # noqa:WPS323
 
         assert log.source_ip == '127.0.0.1'
-        assert _datefmt(log.date) == _datefmt(datetime(2020, 5, 25))
-        assert log.headers == {
+        assert _datefmt(log.request_date) == _datefmt(datetime(2020, 5, 25))
+        assert log.request_headers == {
             'Content-Length': '4',
             'Content-Type': content_type,
             'Cookie': '',
         }
-        assert log.body == 'test'
+        assert log.request_body == 'test'
         assert log.http_stub == http_stub
         assert log.method == HTTPMethod.POST.name
         assert log.path == f'http://testserver{request_path}'
         assert log.result_script == 'Done'
+        assert log.resp_status == http_stub.resp_status
 
     def test_empty_log(self, http_stub_factory, client):
         """Tests http stub without logs.
@@ -96,7 +102,7 @@ class TestHTTPStubView:
         assert response.status_code == HTTPStatus.OK
         assert LogEntry.objects.last() is None
 
-    @pytest.mark.parametrize('method', HTTPMethod.names())
+    @pytest.mark.parametrize('method', HTTPMethod.values)
     def test_exist_regexp_stub(self, method: str, http_stub_factory, client):
         """Tests response for the regex stub.
 
@@ -166,3 +172,130 @@ class TestHTTPStubView:
         http_stub_factory(path=regexp, regex_path=True)
         response = client.get(path)
         assert response.status_code == status_code
+
+    @patch('http_stubs.views.requests.request')
+    def test_proxy_httpstub_executor(
+        self,
+        mock_request_func,
+        proxy_http_stub_factory,
+    ):
+        """Test for _proxy_httpstub_executor fync.
+
+        :param mock_request_func: patched request func
+        :param proxy_http_stub_factory: factory proxy stubs
+        """
+        request = HttpRequest()
+        request.method = HTTPMethod.OPTIONS.name
+        request.path = '127.0.0.1/test_request_path'
+        request.META['HTTP_TEST_HEADER'] = 'Value'
+        request.META['SERVER_NAME'] = '127.0.0.1'
+        request.META['SERVER_PORT'] = '80'
+        request.META['REMOTE_ADDR'] = '192.168.1.42'
+        request._body = b'test_body'
+        request.GET['q'] = 'testParam'
+
+        fake_response = Response()
+        fake_response.headers['TEST_RESPONSE_HEADER'] = '1'
+        fake_response.headers['Content-Type'] = 'text/plain'
+        # not supported wsgi header
+        fake_response.headers['Trailers'] = 'value'
+        fake_response._content = b'I am a teapot'
+        fake_response.status_code = 420
+        fake_response.request = Request(url='target_url')
+        mock_request_func.return_value = fake_response
+
+        # test without additional params
+        stub = proxy_http_stub_factory(target_url='test_target_url')
+        views._proxy_httpstub_executor(stub, request)
+
+        call_args = mock_request_func.call_args.kwargs
+        assert call_args['method'] == HTTPMethod.GET.name
+        assert call_args['url'] == stub.target_url
+        assert call_args['data'] == request._body
+        assert call_args['verify'] is True
+        assert call_args['timeout'] == 15
+
+        stub = proxy_http_stub_factory(
+            target_url='test_target_url',
+            allow_forward_query=True,
+            target_body='test target body',
+            target_method=HTTPMethod.TRACE.name,
+            target_headers={'test_target_header': 1},
+        )
+
+        response, log = views._proxy_httpstub_executor(stub, request)
+
+        log.refresh_from_db()
+
+        call_args = mock_request_func.call_args.kwargs
+        assert call_args['method'] == stub.target_method
+        assert call_args['url'] == stub.target_url
+        assert call_args['headers']['test_target_header'] == 1
+        assert call_args['data'] == stub.target_body
+        assert call_args['params']['q'] == 'testParam'
+
+        assert response.status_code == fake_response.status_code
+        assert response.content == fake_response.content
+        assert response._headers['test_response_header'][1] == '1'
+
+        assert log.http_stub_id == stub.pk
+        assert log.path == 'http://127.0.0.1/test_request_path'
+        assert log.method == request.method
+        assert log.source_ip == request.META['REMOTE_ADDR']
+        assert log.request_headers == {'Test-Header': 'Value'}
+        assert log.request_body == 'test_body'
+        assert log.result_script == ''
+        assert log.target_path == fake_response.request.url
+        assert log.response_latency == 0
+        assert log.response_body == 'I am a teapot'
+        assert log.response_headers == fake_response.headers
+        assert log.resp_status == fake_response.status_code
+
+    def test_response_templating(self, http_stub_factory, client):
+        """Tests response templating.
+
+        :param http_stub_factory: HTTPStub factory
+        :param client: http client fixture
+        """
+        tpl = 'arg1=$arg1 arg2=$arg2 $ $none body=$body'
+
+        http_stub_factory(
+            path='/test/',
+            regex_path=True,
+            method=HTTPMethod.POST,
+            resp_body=tpl,
+            resp_headers={'TEST': tpl},
+        )
+        response = client.post(
+            '/test/?arg1=Kesha&arg2=42',
+            'big body',
+            'text/plain',
+        )
+
+        exp_string = b'arg1=Kesha arg2=42 $ $none body=big body'
+
+        assert response.status_code == HTTPStatus.OK
+        assert response.content == exp_string
+        assert response._headers['test'][1] == exp_string.decode()
+
+
+@pytest.mark.parametrize(
+    'body, encoding, expect', (
+        (b'test_body', '', 'test_body'),
+        (b'', '', ''),
+        ('тестовое тело'.encode('koi8-r'), '', ''),
+        ('тестовое тело'.encode('koi8-r'), 'koi8-r', 'тестовое тело'),
+    ),
+)
+def test_request_body_decode(body, encoding, expect):
+    """Test for _request_body_decode func.
+
+    :param body: request body
+    :param encoding: request encoding
+    :param expect: expecting result
+    """
+    request = HttpRequest()
+
+    request._body = body
+    request._encoding = encoding
+    assert views._request_body_decode(request) == expect

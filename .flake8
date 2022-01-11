@@ -21,6 +21,10 @@ ignore =
   WPS115,
   ; f-string missing prefix
   FS003,
+  ; Found a too complex `f` string
+  WPS237,
+  ; Found wrong metadata variable
+  WPS410,
 
 per-file-ignores =
   ; all tests
@@ -41,6 +45,8 @@ per-file-ignores =
   WPS211,
   ; Found too many `assert` statements
   WPS218,
+  ; Found too many methods
+  WPS214,
 
   ; all init files
   __init__.py:
