@@ -254,6 +254,7 @@ class TestHTTPStubView:
     def test_response_templating(self, http_stub_factory, client):
         """Tests response templating.
 
+        :param http_stub_factory: HTTPStub factory
         :param client: http client fixture
         """
         tpl = 'arg1=$arg1 arg2=$arg2 $ $none body=$body'

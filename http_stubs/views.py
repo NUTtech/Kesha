@@ -1,4 +1,3 @@
-import json
 from string import Template
 from time import sleep
 from typing import Optional, Tuple, Union
@@ -25,7 +24,7 @@ def _request_body_decode(request: HttpRequest) -> str:
         return ''
 
 
-def _httpstub_executor(
+def _httpstub_executor(  # noqa: WPS210
     stub: HTTPStub,
     request: HttpRequest,
 ) -> Tuple[HttpResponse, Optional[LogEntry]]:
@@ -41,8 +40,8 @@ def _httpstub_executor(
 
     tpl_ctx = {'body': request_body}
 
-    for key, value in dict(request.GET).items():
-        tpl_ctx[key] = value[0]
+    for arg_name, arg_val in dict(request.GET).items():
+        tpl_ctx[arg_name] = arg_val[0]
 
     response = HttpResponse(
         content=Template(stub.resp_body).safe_substitute(tpl_ctx),
