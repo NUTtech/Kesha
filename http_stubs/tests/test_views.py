@@ -251,6 +251,32 @@ class TestHTTPStubView:
         assert log.response_headers == fake_response.headers
         assert log.resp_status == fake_response.status_code
 
+    def test_response_templating(self, http_stub_factory, client):
+        """Tests response templating.
+
+        :param client: http client fixture
+        """
+        tpl = 'arg1=$arg1 arg2=$arg2 $ $none body=$body'
+
+        http_stub_factory(
+            path='/test/',
+            regex_path=True,
+            method=HTTPMethod.POST,
+            resp_body=tpl,
+            resp_headers={'TEST': tpl},
+        )
+        response = client.post(
+            '/test/?arg1=Kesha&arg2=42',
+            'big body',
+            'text/plain',
+        )
+
+        exp_string = b'arg1=Kesha arg2=42 $ $none body=big body'
+
+        assert response.status_code == HTTPStatus.OK
+        assert response.content == exp_string
+        assert response._headers['test'][1] == exp_string.decode()
+
 
 @pytest.mark.parametrize(
     'body, encoding, expect', (

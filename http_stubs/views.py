@@ -1,3 +1,5 @@
+import json
+from string import Template
 from time import sleep
 from typing import Optional, Tuple, Union
 from wsgiref.util import is_hop_by_hop
@@ -35,14 +37,21 @@ def _httpstub_executor(
     """
     sleep(stub.resp_delay / 1000)
 
+    request_body = _request_body_decode(request)
+
+    tpl_ctx = {'body': request_body}
+
+    for key, value in dict(request.GET).items():
+        tpl_ctx[key] = value[0]
+
     response = HttpResponse(
-        content=stub.resp_body,
+        content=Template(stub.resp_body).safe_substitute(tpl_ctx),
         content_type=stub.resp_content_type,
         status=stub.resp_status,
     )
 
     for header_name, header_value in stub.resp_headers.items():
-        response[header_name] = header_value
+        response[header_name] = Template(header_value).safe_substitute(tpl_ctx)
 
     result_script = 'Was launched' if stub.request_script else ''
 
@@ -51,7 +60,7 @@ def _httpstub_executor(
         method=request.method,
         source_ip=request.META['REMOTE_ADDR'],
         request_headers=dict(request.headers),
-        request_body=_request_body_decode(request),
+        request_body=request_body,
         http_stub=stub,
         result_script=result_script,
         resp_status=stub.resp_status,
