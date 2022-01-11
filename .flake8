@@ -45,6 +45,8 @@ per-file-ignores =
   WPS211,
   ; Found too many `assert` statements
   WPS218,
+  ; Found too many methods
+  WPS214,
 
   ; all init files
   __init__.py:
