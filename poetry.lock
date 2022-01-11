@@ -1069,11 +1069,11 @@ use_chardet_on_py3 = ["chardet (>=3.0.2,<5)"]
 
 [[package]]
 name = "restrictedpython"
-version = "5.1"
+version = "5.2"
 description = "RestrictedPython is a defined subset of the Python language which allows to provide a program input into a trusted environment."
 category = "main"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <3.10"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <3.11"
 
 [package.extras]
 docs = ["sphinx", "sphinx-rtd-theme"]
@@ -1293,7 +1293,7 @@ typing_extensions = ">=3.6,<4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.8"
-content-hash = "89f35cdfe51a93fe73bd8c71d7b441bb57274921ccf2c093d124e6224c031bea"
+content-hash = "283d2e1a90b9578667d99c27d5c5c8e6a5505f9d7d804061231590482e187f61"
 
 [metadata.files]
 amqp = [
@@ -1823,8 +1823,8 @@ requests = [
     {file = "requests-2.26.0.tar.gz", hash = "sha256:b8aa58f8cf793ffd8782d3d8cb19e66ef36f7aba4353eec859e74678b01b07a7"},
 ]
 restrictedpython = [
-    {file = "RestrictedPython-5.1-py2.py3-none-any.whl", hash = "sha256:bd0eb3b2188642926570fa7ec725cac5660f69c4f7aa66d6e869525e189a3196"},
-    {file = "RestrictedPython-5.1.tar.gz", hash = "sha256:9ae16e500782b41bd1abefd8554ccb26330817bba9ce090d385aa226f1ca83e8"},
+    {file = "RestrictedPython-5.2-py2.py3-none-any.whl", hash = "sha256:fdf8621034c5dcb990a2a198f232f66b2d48866dd16d848e00ac7d187ae452ba"},
+    {file = "RestrictedPython-5.2.tar.gz", hash = "sha256:634da1f6c5c122a262f433b083ee3d17a9a039f8f1b3778597efb47461cd361b"},
 ]
 restructuredtext-lint = [
     {file = "restructuredtext_lint-1.3.2.tar.gz", hash = "sha256:d3b10a1fe2ecac537e51ae6d151b223b78de9fafdd50e5eb6b08c243df173c80"},
