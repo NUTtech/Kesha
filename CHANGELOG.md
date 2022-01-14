@@ -8,6 +8,12 @@ We follow [Semantic Versions](https://semver.org/).
 - Add status saving to the log [#75](https://github.com/NUTtech/Kesha/issues/75)
 - Add proxy requests with a two-way log record  [#9](https://github.com/NUTtech/Kesha/issues/9)
 
+BACKWARD COMPATIBILITY BREAK:
+- Renamed LogEntry model fields [#9](https://github.com/NUTtech/Kesha/issues/9): 
+  - body -> request_body
+  - date -> request_date
+  - headers -> request_headers
+
 ### Minor changes
 - Add type annotations [#4](https://github.com/NUTtech/Kesha/issues/4)
 - Change logo [#60](https://github.com/NUTtech/Kesha/issues/60)
