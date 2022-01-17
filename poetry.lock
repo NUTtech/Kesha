@@ -992,7 +992,7 @@ pytest = ">=3.0.0"
 
 [[package]]
 name = "pytest-mypy-plugins"
-version = "1.9.2"
+version = "1.9.3"
 description = "pytest plugin for writing tests for mypy plugins"
 category = "dev"
 optional = false
@@ -1296,7 +1296,7 @@ typing_extensions = ">=3.6,<5.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.8"
-content-hash = "56c81615454ca472347082287bcac52a171a332dcca6bb81e6f58c9f207d5ba7"
+content-hash = "a1ad5050407d75cdf7f2ee876e824061fa6b58a7c37d7c0a5ef077a84cfea5d7"
 
 [metadata.files]
 amqp = [
@@ -1739,8 +1739,8 @@ pytest-freezegun = [
     {file = "pytest_freezegun-0.4.2-py2.py3-none-any.whl", hash = "sha256:5318a6bfb8ba4b709c8471c94d0033113877b3ee02da5bfcd917c1889cde99a7"},
 ]
 pytest-mypy-plugins = [
-    {file = "pytest-mypy-plugins-1.9.2.tar.gz", hash = "sha256:26528ab66549ade53badae2ab396f426379f921bf5ddd91534c669a25b4b7e69"},
-    {file = "pytest_mypy_plugins-1.9.2-py3-none-any.whl", hash = "sha256:1985d27d84c92c14b1604eda2adf2d1c9d0c050633fd48183d661eb5deac23ee"},
+    {file = "pytest-mypy-plugins-1.9.3.tar.gz", hash = "sha256:c2c6590ee68fd634013fdd0b47a5c83df300afd8b38d5aabd3b29e21b7907221"},
+    {file = "pytest_mypy_plugins-1.9.3-py3-none-any.whl", hash = "sha256:10e60bd59a2b043ebda70f9a0ad1a8c9324ce6d0b46b93cae3b1172df2d4d81b"},
 ]
 python-dateutil = [
     {file = "python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
