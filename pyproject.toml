@@ -28,7 +28,7 @@ django_settings_module = "kesha.settings"
 [tool.poetry.dependencies]
 python = "~3.8"
 django = "~3.1"
-django-simpleui = "~2022.1"
+django-simpleui = "~2022.4"
 uvicorn = "~0.17.6"
 psycopg2-binary = "~2.9.3"
 django-environ = "^0.8.1"
