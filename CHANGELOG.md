@@ -1,12 +1,40 @@
 # Version history
 We follow [Semantic Versions](https://semver.org/).
 
+## 2.1.0 - Update dependencies
+
+### Minor changes
+- Add uvicorn workers env variable [#131](https://github.com/NUTtech/Kesha/pull/131)
+
+### Updating dependencies
+- bump ipython from 7.31.0 to 8.3.0 [#184](https://github.com/NUTtech/Kesha/pull/184)
+- bump types-requests from 2.27.7 to 2.27.25 [#183](https://github.com/NUTtech/Kesha/pull/183)
+- bump mypy from 0.931 to 0.950 [#181](https://github.com/NUTtech/Kesha/pull/181)
+- bump pytest from 6.2.5 to 7.1.2 [#179](https://github.com/NUTtech/Kesha/pull/179)
+- bump django-simpleui from 2022.1 to 2022.4.9 [#175](https://github.com/NUTtech/Kesha/pull/175)
+- bump celery from 5.2.3 to 5.2.6 [#174](https://github.com/NUTtech/Kesha/pull/174)
+- bump django-stubs-ext from 0.3.1 to 0.4.0 [#171](https://github.com/NUTtech/Kesha/pull/171)
+- bump wemake-python-styleguide from 0.16.0 to 0.16.1 [#160](https://github.com/NUTtech/Kesha/pull/160)
+- bump uvicorn from 0.17.0 to 0.17.6 [#158](https://github.com/NUTtech/Kesha/pull/158)
+- bump celery-types from 0.10.0 to 0.12.0 [#154](https://github.com/NUTtech/Kesha/pull/154)
+- bump flake8-annotations-coverage from 0.0.5 to 0.0.6 [#149](https://github.com/NUTtech/Kesha/pull/149)
+- bump uvicorn from 0.16.0 to 0.17.0 [#132](https://github.com/NUTtech/Kesha/pull/132)
+- bump types-requests from 2.27.5 to 2.27.7 [#130](https://github.com/NUTtech/Kesha/pull/130)
+- bump celery from 5.2.2 to 5.2.3 [#126](https://github.com/NUTtech/Kesha/pull/126)
+- bump pytest-mypy-plugins from 1.9.2 to 1.9.3 [#125](https://github.com/NUTtech/Kesha/pull/125)
+
 ## 2.0.0 - New major version
 
 ### Important changes
 - Add templating for response body and response headers [#7](https://github.com/NUTtech/Kesha/issues/7)
 - Add status saving to the log [#75](https://github.com/NUTtech/Kesha/issues/75)
 - Add proxy requests with a two-way log record  [#9](https://github.com/NUTtech/Kesha/issues/9)
+
+BACKWARD COMPATIBILITY BREAK:
+- Renamed LogEntry model fields [#9](https://github.com/NUTtech/Kesha/issues/9): 
+  - body -> request_body
+  - date -> request_date
+  - headers -> request_headers
 
 ### Minor changes
 - Add type annotations [#4](https://github.com/NUTtech/Kesha/issues/4)
