@@ -335,7 +335,7 @@ Django = ">=2.2"
 
 [[package]]
 name = "django-simpleui"
-version = "2022.4.9"
+version = "2022.7.29"
 description = "django admin theme 后台模板"
 category = "main"
 optional = false
@@ -1354,7 +1354,7 @@ typing_extensions = ">=3.6,<5.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "~3.8"
-content-hash = "40bf7aa9e1217160288fb7580d4dcb995762c71ceaa93045ace2b7f25794eb26"
+content-hash = "1cd26ee9b248f3020d9446acd7a8d54c0399577bc6e83d1facade925a7495ea1"
 
 [metadata.files]
 amqp = [
@@ -1505,7 +1505,7 @@ django-extensions = [
     {file = "django_extensions-3.1.5-py3-none-any.whl", hash = "sha256:9238b9e016bb0009d621e05cf56ea8ce5cce9b32e91ad2026996a7377ca28069"},
 ]
 django-simpleui = [
-    {file = "django-simpleui-2022.4.9.tar.gz", hash = "sha256:cdfe307ea9987d2b539a24d5ee9a74e02e564d5eab1a3c5f6e97a3202f3be1a3"},
+    {file = "django-simpleui-2022.7.29.tar.gz", hash = "sha256:b8844c16b9496ea4ee57a164a475d1e103448790399a42ba9aeebec00673034f"},
 ]
 django-stubs = [
     {file = "django-stubs-1.9.0.tar.gz", hash = "sha256:664843091636a917faf5256d028476559dc360fdef9050b6df87ab61b21607bf"},
