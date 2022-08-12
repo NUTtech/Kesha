@@ -49,10 +49,12 @@ lint:  ## Start project's lint on docker
 	    -f deploy/docker-compose.yml \
 	    ${OVERRIDE} \
 	    --project-directory . \
-	    run --rm kesha \
-	        flake8 --count
+	    run \
+			--rm \
+			--volume "$$(pwd):/app/src:z" \
+			kesha flake8 --count
 
-build:  ## Build docker image
+build: envfile ## Build docker image
 	docker-compose \
 		-f deploy/docker-compose.yml \
 		${OVERRIDE} \
@@ -63,7 +65,7 @@ envfile:  ## Generate env file with variables with prefix KESHA_
 	$(shell env | egrep '^KESHA_' > .gen.env && echo '.gen.env has been generated' || touch .gen.env)
 	$(shell test -f .env && cat .env > .gen.env)
 
-runserver:  envfile  ## Local startup the app on docker with required services
+runserver: envfile  ## Local startup the app on docker with required services
 	docker-compose \
 		-f deploy/docker-compose.yml \
 		-f deploy/docker-compose.db.yml \
@@ -72,7 +74,7 @@ runserver:  envfile  ## Local startup the app on docker with required services
 		--project-directory . \
 		up
 
-runserver-uvicorn:  envfile  ## Local startup the app on docker with uvicorn
+runserver-uvicorn: envfile  ## Local startup the app on docker with uvicorn
 	docker-compose \
 		-f deploy/docker-compose.yml \
 		-f deploy/docker-compose.db.yml \

@@ -8,4 +8,4 @@ services:
     environment:
       - DEBUG=1
     volumes:
-      - ".:/app/src"
+      - ".:/app/src:z"

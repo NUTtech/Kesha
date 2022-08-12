@@ -3,7 +3,7 @@ _Web-service for testing http requests and webhooks._
 
 Project info:
 [![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/nextuptechnologies/kesha/latest)](https://registry.hub.docker.com/r/nextuptechnologies/kesha)
-![Python Version](https://img.shields.io/static/v1?label=python&message=3.8&color=blue)
+![Python Version](https://img.shields.io/static/v1?label=python&message=3.10&color=blue)
 ![License](https://img.shields.io/static/v1?label=license&message=Apache+2&color=blue)
 
 Build:

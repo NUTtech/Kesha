@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.10
 
 # Disables the buffer for instant output of messages to stdout from processes.
 ENV PYTHONUNBUFFERED=1

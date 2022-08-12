@@ -16,7 +16,7 @@ services:
     ports:
       - "5432"
     volumes:
-      - "${KESHA_DB_VOLUME:-db-volume}:/var/lib/postgresql/data"
+      - "${KESHA_DB_VOLUME:-db-volume}:/var/lib/postgresql/data:z"
     networks:
       app:
       celery:
