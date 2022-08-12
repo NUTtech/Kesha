@@ -1,0 +1,435 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Changelog - Kesha</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Kesha</li><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> About Kesha!</a></li><li class="chapter-item expanded "><a href="quick-start/index.html"><strong aria-hidden="true">2.</strong> Quick Start</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="quick-start/system-requires.html"><strong aria-hidden="true">2.1.</strong> System requires</a></li><li class="chapter-item expanded "><a href="quick-start/local-run.html"><strong aria-hidden="true">2.2.</strong> Local run</a></li></ol></li><li class="chapter-item expanded "><a href="usage/index.html"><strong aria-hidden="true">3.</strong> Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="usage/first-steps.html"><strong aria-hidden="true">3.1.</strong> First steps</a></li><li class="chapter-item expanded "><a href="usage/proxy-stubs.html"><strong aria-hidden="true">3.2.</strong> Proxy stubs</a></li><li class="chapter-item expanded "><a href="usage/request-scripts.html"><strong aria-hidden="true">3.3.</strong> Request scripts</a></li><li class="chapter-item expanded "><a href="usage/response-templating.html"><strong aria-hidden="true">3.4.</strong> Response templating</a></li></ol></li><li class="chapter-item expanded "><a href="changelog.html" class="active"><strong aria-hidden="true">4.</strong> Changelog</a></li><li class="chapter-item expanded "><a href="contributing.html"><strong aria-hidden="true">5.</strong> Contributing</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="contributors.html">Contributors</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Kesha</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#version-history" id="version-history">Version history</a></h1>
+<p>We follow <a href="https://semver.org/">Semantic Versions</a>.</p>
+<h2><a class="header" href="#221---fix-docs" id="221---fix-docs">2.2.1 - Fix docs</a></h2>
+<h3><a class="header" href="#minor-changes" id="minor-changes">Minor changes</a></h3>
+<ul>
+<li>Fix docs <a href="https://github.com/NUTtech/Kesha/pull/227">#227</a></li>
+</ul>
+<h2><a class="header" href="#220---update-dependencies" id="220---update-dependencies">2.2.0 - Update dependencies</a></h2>
+<h3><a class="header" href="#updating-dependencies" id="updating-dependencies">Updating dependencies</a></h3>
+<ul>
+<li>bump django from 3.1.14 to 4.1 <a href="https://github.com/NUTtech/Kesha/pull/226">#226</a></li>
+<li>bump python from 3.8 to 3.10 <a href="https://github.com/NUTtech/Kesha/pull/225">#225</a></li>
+<li>bump mypy from 0.950 to 0.971 <a href="https://github.com/NUTtech/Kesha/pull/212">#212</a></li>
+<li>bump django-stubs from 1.9.0 to 1.12.0 <a href="https://github.com/NUTtech/Kesha/pull/202">#202</a></li>
+<li>bump ipython from 8.3.0 to 8.4.0 <a href="https://github.com/NUTtech/Kesha/pull/192">#192</a></li>
+<li>bump flake8-use-fstring from 1.3 to 1.4 <a href="https://github.com/NUTtech/Kesha/pull/217">#217</a></li>
+<li>bump celery from 5.2.6 to 5.2.7 <a href="https://github.com/NUTtech/Kesha/pull/191">#191</a></li>
+<li>bump django-simpleui from 2022.4.9 to 2022.7.29 <a href="https://github.com/NUTtech/Kesha/pull/216">#216</a></li>
+<li>bump celery-types from 0.12.0 to 0.13.1 <a href="https://github.com/NUTtech/Kesha/pull/199">#199</a></li>
+<li>bump requests from 2.27.1 to 2.28.1 <a href="https://github.com/NUTtech/Kesha/pull/208">#208</a></li>
+<li>bump django-environ from 0.8.1 to 0.9.0 <a href="https://github.com/NUTtech/Kesha/pull/201">#201</a></li>
+<li>bump uvicorn from 0.17.6 to 0.18.2 <a href="https://github.com/NUTtech/Kesha/pull/207">#207</a></li>
+<li>bump django-stubs-ext from 0.4.0 to 0.5.0 <a href="https://github.com/NUTtech/Kesha/pull/203">#203</a></li>
+<li>bump types-requests from 2.27.25 to 2.28.8 <a href="https://github.com/NUTtech/Kesha/pull/222">#222</a></li>
+<li>bump flake8-django from 1.1.2 to 1.1.5 <a href="https://github.com/NUTtech/Kesha/pull/223">#223</a></li>
+</ul>
+<h2><a class="header" href="#210---update-dependencies" id="210---update-dependencies">2.1.0 - Update dependencies</a></h2>
+<h3><a class="header" href="#minor-changes-1" id="minor-changes-1">Minor changes</a></h3>
+<ul>
+<li>Add uvicorn workers env variable <a href="https://github.com/NUTtech/Kesha/pull/131">#131</a></li>
+</ul>
+<h3><a class="header" href="#updating-dependencies-1" id="updating-dependencies-1">Updating dependencies</a></h3>
+<ul>
+<li>bump ipython from 7.31.0 to 8.3.0 <a href="https://github.com/NUTtech/Kesha/pull/184">#184</a></li>
+<li>bump types-requests from 2.27.7 to 2.27.25 <a href="https://github.com/NUTtech/Kesha/pull/183">#183</a></li>
+<li>bump mypy from 0.931 to 0.950 <a href="https://github.com/NUTtech/Kesha/pull/181">#181</a></li>
+<li>bump pytest from 6.2.5 to 7.1.2 <a href="https://github.com/NUTtech/Kesha/pull/179">#179</a></li>
+<li>bump django-simpleui from 2022.1 to 2022.4.9 <a href="https://github.com/NUTtech/Kesha/pull/175">#175</a></li>
+<li>bump celery from 5.2.3 to 5.2.6 <a href="https://github.com/NUTtech/Kesha/pull/174">#174</a></li>
+<li>bump django-stubs-ext from 0.3.1 to 0.4.0 <a href="https://github.com/NUTtech/Kesha/pull/171">#171</a></li>
+<li>bump wemake-python-styleguide from 0.16.0 to 0.16.1 <a href="https://github.com/NUTtech/Kesha/pull/160">#160</a></li>
+<li>bump uvicorn from 0.17.0 to 0.17.6 <a href="https://github.com/NUTtech/Kesha/pull/158">#158</a></li>
+<li>bump celery-types from 0.10.0 to 0.12.0 <a href="https://github.com/NUTtech/Kesha/pull/154">#154</a></li>
+<li>bump flake8-annotations-coverage from 0.0.5 to 0.0.6 <a href="https://github.com/NUTtech/Kesha/pull/149">#149</a></li>
+<li>bump uvicorn from 0.16.0 to 0.17.0 <a href="https://github.com/NUTtech/Kesha/pull/132">#132</a></li>
+<li>bump types-requests from 2.27.5 to 2.27.7 <a href="https://github.com/NUTtech/Kesha/pull/130">#130</a></li>
+<li>bump celery from 5.2.2 to 5.2.3 <a href="https://github.com/NUTtech/Kesha/pull/126">#126</a></li>
+<li>bump pytest-mypy-plugins from 1.9.2 to 1.9.3 <a href="https://github.com/NUTtech/Kesha/pull/125">#125</a></li>
+</ul>
+<h2><a class="header" href="#200---new-major-version" id="200---new-major-version">2.0.0 - New major version</a></h2>
+<h3><a class="header" href="#important-changes" id="important-changes">Important changes</a></h3>
+<ul>
+<li>Add templating for response body and response headers <a href="https://github.com/NUTtech/Kesha/issues/7">#7</a></li>
+<li>Add status saving to the log <a href="https://github.com/NUTtech/Kesha/issues/75">#75</a></li>
+<li>Add proxy requests with a two-way log record  <a href="https://github.com/NUTtech/Kesha/issues/9">#9</a></li>
+</ul>
+<p>BACKWARD COMPATIBILITY BREAK:</p>
+<ul>
+<li>Renamed LogEntry model fields <a href="https://github.com/NUTtech/Kesha/issues/9">#9</a>: 
+<ul>
+<li>body -&gt; request_body</li>
+<li>date -&gt; request_date</li>
+<li>headers -&gt; request_headers</li>
+</ul>
+</li>
+</ul>
+<h3><a class="header" href="#minor-changes-2" id="minor-changes-2">Minor changes</a></h3>
+<ul>
+<li>Add type annotations <a href="https://github.com/NUTtech/Kesha/issues/4">#4</a></li>
+<li>Change logo <a href="https://github.com/NUTtech/Kesha/issues/60">#60</a></li>
+<li>Update wemake-style-guide <a href="https://github.com/NUTtech/Kesha/issues/61">#61</a></li>
+<li>Adds badge for CodeQL <a href="https://github.com/NUTtech/Kesha/pull/19">#19</a></li>
+<li>Fixes run CodeQL <a href="https://github.com/NUTtech/Kesha/pull/18">#18</a></li>
+</ul>
+<h3><a class="header" href="#updating-dependencies-2" id="updating-dependencies-2">Updating dependencies</a></h3>
+<ul>
+<li>django from 3.1.13 to 3.1.14 <a href="https://github.com/NUTtech/Kesha/pull/124">#124</a></li>
+<li>ipython from 7.28.0 to 7.31.0 <a href="https://github.com/NUTtech/Kesha/pull/119">#119</a></li>
+<li>uvicorn from 0.15.0 to 0.16.0 <a href="https://github.com/NUTtech/Kesha/pull/104">#104</a></li>
+<li>django-debug-toolbar from 3.2.2 to 3.2.4 <a href="https://github.com/NUTtech/Kesha/pull/109">#109</a></li>
+<li>django-extensions from 3.1.3 to 3.1.5 <a href="https://github.com/NUTtech/Kesha/pull/89">#89</a></li>
+<li>psycopg2-binary from 2.9.1 to 2.9.3 <a href="https://github.com/NUTtech/Kesha/pull/116">#116</a></li>
+<li>mypy from 0.910 to 0.931 <a href="https://github.com/NUTtech/Kesha/pull/121">#121</a></li>
+<li>requests from 2.26.0 to 2.27.1 <a href="https://github.com/NUTtech/Kesha/pull/118">#118</a></li>
+<li>wemake-python-styleguide from 0.15.3 to 0.16.0 <a href="https://github.com/NUTtech/Kesha/pull/107">#107</a></li>
+<li>pytest-django from 4.4.0 to 4.5.2 <a href="https://github.com/NUTtech/Kesha/pull/102">#102</a></li>
+<li>celery-types from 0.8.2 to 0.10.0 <a href="https://github.com/NUTtech/Kesha/pull/117">#117</a></li>
+<li>django-simpleui from 2021.10.15 to 2022.1 <a href="https://github.com/NUTtech/Kesha/pull/106">#106</a></li>
+<li>celery from 5.1.2 to 5.2.3 <a href="https://github.com/NUTtech/Kesha/pull/115">#115</a></li>
+<li>restrictedpython from 5.1 to 5.2 <a href="https://github.com/NUTtech/Kesha/pull/94">#94</a></li>
+<li>types-requests from 2.25.11 to 2.27.5 <a href="https://github.com/NUTtech/Kesha/pull/122">#122</a></li>
+<li>lake8-use-fstring from 1.2.1 to 1.3 <a href="https://github.com/NUTtech/Kesha/pull/79">#79</a></li>
+<li>django-environ from 0.8.0 to 0.8.1 <a href="https://github.com/NUTtech/Kesha/pull/76">#76</a></li>
+<li>flake8-use-fstring from 1.2 to 1.2.1 <a href="https://github.com/NUTtech/Kesha/pull/77">#77</a></li>
+<li>pytest-mypy-plugins from 1.9.1 to 1.9.2 <a href="https://github.com/NUTtech/Kesha/pull/73">#73</a></li>
+<li>flake8-use-fstring from 1.1 to 1.2 <a href="https://github.com/NUTtech/Kesha/pull/74">#74</a></li>
+<li>celery-types from 0.8.1 to 0.8.2 <a href="https://github.com/NUTtech/Kesha/pull/72">#72</a></li>
+<li>django-environ from 0.7.0 to 0.8.0 <a href="https://github.com/NUTtech/Kesha/pull/69">#69</a></li>
+<li>django-simpleui from 2021.8.17 to 2021.10.15 <a href="https://github.com/NUTtech/Kesha/pull/68">#68</a></li>
+<li>pytest-django from 4.3.0 to 4.4.0 <a href="https://github.com/NUTtech/Kesha/pull/33">#33</a></li>
+<li>django-environ from 0.4.5 to 0.7.0 <a href="https://github.com/NUTtech/Kesha/pull/54">#54</a></li>
+<li>django-simpleui from 2021.3 to 2021.8.17 <a href="https://github.com/NUTtech/Kesha/pull/48">#48</a></li>
+<li>celery from 5.1.0 to 5.1.2 <a href="https://github.com/NUTtech/Kesha/pull/38">#38</a></li>
+<li>requests from 2.25.1 to 2.26.0 <a href="https://github.com/NUTtech/Kesha/pull/41">#41</a></li>
+<li>psycopg2-binary from 2.8.6 to 2.9.1 <a href="https://github.com/NUTtech/Kesha/pull/34">#34</a></li>
+<li>pytest from 6.2.4 to 6.2.5 <a href="https://github.com/NUTtech/Kesha/pull/51">#51</a></li>
+<li>ipython from 7.23.1 to 7.28.0 <a href="https://github.com/NUTtech/Kesha/pull/55">#55</a></li>
+<li>pytest-cov from 2.12.0 to 3.0.0 <a href="https://github.com/NUTtech/Kesha/pull/56">#56</a></li>
+<li>celery from 5.0.5 to 5.1.0 <a href="https://github.com/NUTtech/Kesha/pull/21">#21</a></li>
+<li>pytest-django from 4.1.0 to 4.3.0 <a href="https://github.com/NUTtech/Kesha/pull/13">#13</a></li>
+<li>pytest-cov from 2.11.1 to 2.12.0 <a href="https://github.com/NUTtech/Kesha/pull/16">#16</a></li>
+</ul>
+<h2><a class="header" href="#120---the-parrots-name-is-now-kesha" id="120---the-parrots-name-is-now-kesha">1.2.0 - The parrot's name is now Kesha!</a></h2>
+<h2><a class="header" href="#110---disable-logs-by-default" id="110---disable-logs-by-default">1.1.0 - Disable logs by default</a></h2>
+<h3><a class="header" href="#important-changes-1" id="important-changes-1">Important changes</a></h3>
+<ul>
+<li>Disable the log for a specific stub <a href="https://github.com/Uma-Tech/parrot/pull/110">#110</a></li>
+</ul>
+<h3><a class="header" href="#updating-dependencies-3" id="updating-dependencies-3">Updating dependencies</a></h3>
+<ul>
+<li>django-simpleui from 2021.1.1 to 2021.3 <a href="https://github.com/Uma-Tech/parrot/pull/106">#106</a></li>
+<li>django-extensions from 3.1.0 to 3.1.1 <a href="https://github.com/Uma-Tech/parrot/pull/101">#101</a></li>
+<li>pytest-cov from 2.10.1 to 2.11.1 <a href="https://github.com/Uma-Tech/parrot/pull/96">#96</a></li>
+<li>pytest from 6.2.1 to 6.2.2 <a href="https://github.com/Uma-Tech/parrot/pull/97">#97</a></li>
+<li>uvicorn from 0.13.2 to 0.13.4 <a href="https://github.com/Uma-Tech/parrot/pull/105">#105</a></li>
+<li>django from 3.1.4 to 3.1.7 <a href="https://github.com/Uma-Tech/parrot/pull/104">#104</a></li>
+<li>flake8-annotations-coverage from 0.0.4 to 0.0.5 <a href="https://github.com/Uma-Tech/parrot/pull/94">#94</a></li>
+<li>ipython from 7.19.0 to 7.21.0 <a href="https://github.com/Uma-Tech/parrot/pull/107">#107</a></li>
+</ul>
+<h2><a class="header" href="#101---improving-docs" id="101---improving-docs">1.0.1 - Improving docs</a></h2>
+<h3><a class="header" href="#important-changes-2" id="important-changes-2">Important changes</a></h3>
+<ul>
+<li>Improving docs <a href="https://github.com/Uma-Tech/parrot/pull/91">#91</a></li>
+</ul>
+<h3><a class="header" href="#updating-dependencies-4" id="updating-dependencies-4">Updating dependencies</a></h3>
+<ul>
+<li>django-simpleui from 2020.9.26 to 2021.1.1 <a href="https://github.com/Uma-Tech/parrot/pull/80">#80</a></li>
+<li>pytest from 6.1.2 to 6.2.1 <a href="https://github.com/Uma-Tech/parrot/pull/88">#88</a></li>
+<li>uvicorn from 0.12.3 to 0.13.2 <a href="https://github.com/Uma-Tech/parrot/pull/89">#89</a></li>
+</ul>
+<h2><a class="header" href="#100---first-stable-release" id="100---first-stable-release">1.0.0 - First stable release</a></h2>
+<h3><a class="header" href="#new-functionality" id="new-functionality">New functionality</a></h3>
+<ul>
+<li>Custom script for each request <a href="https://github.com/Uma-Tech/parrot/pull/70">#70</a></li>
+</ul>
+<h3><a class="header" href="#bug-fixes" id="bug-fixes">Bug fixes</a></h3>
+<ul>
+<li>Fix absolute request url in HttpStubAdmin with regex <a href="https://github.com/Uma-Tech/parrot/pull/78">#78</a></li>
+</ul>
+<h3><a class="header" href="#minor-improvements" id="minor-improvements">Minor improvements</a></h3>
+<ul>
+<li>Fix lgtm alert <a href="https://github.com/Uma-Tech/parrot/pull/90">#90</a></li>
+<li>Improves deploy <a href="https://github.com/Uma-Tech/parrot/pull/85">#85</a></li>
+<li>Display headers in column <a href="https://github.com/Uma-Tech/parrot/pull/46">#46</a></li>
+<li>Formatting request body <a href="https://github.com/Uma-Tech/parrot/pull/52">#52</a></li>
+</ul>
+<h2><a class="header" href="#0110" id="0110">0.1.10</a></h2>
+<ul>
+<li>Fixed issue with Vue breaking on log entries <a href="https://github.com/Uma-Tech/parrot/pull/79">#79</a></li>
+</ul>
+<h2><a class="header" href="#019" id="019">0.1.9</a></h2>
+<ul>
+<li>Fixed enormously long logs page loading time <a href="https://github.com/Uma-Tech/parrot/pull/75">#75</a></li>
+<li>Added django-extensions and ipython for ease of development <a href="https://github.com/Uma-Tech/parrot/pull/74">#74</a></li>
+</ul>
+<h2><a class="header" href="#018" id="018">0.1.8</a></h2>
+<ul>
+<li>Fixed regex stubs with query args <a href="https://github.com/Uma-Tech/parrot/pull/69">#69</a></li>
+</ul>
+<h2><a class="header" href="#017" id="017">0.1.7</a></h2>
+<ul>
+<li>Fix build <a href="https://github.com/Uma-Tech/parrot/pull/66">#66</a></li>
+</ul>
+<h2><a class="header" href="#016" id="016">0.1.6</a></h2>
+<ul>
+<li>Changed max_length for LogEntry.path <a href="https://github.com/Uma-Tech/parrot/pull/65">#65</a></li>
+<li>Move django secret key to env vars <a href="https://github.com/Uma-Tech/parrot/pull/61">#61</a></li>
+<li>Added reading environment from the .env file <a href="https://github.com/Uma-Tech/parrot/pull/60">#60</a></li>
+</ul>
+<h2><a class="header" href="#015" id="015">0.1.5</a></h2>
+<ul>
+<li>Add PARROT_ALLOWED_HOSTS env var <a href="https://github.com/Uma-Tech/parrot/pull/63">#63</a></li>
+</ul>
+<h2><a class="header" href="#014" id="014">0.1.4</a></h2>
+<ul>
+<li>Remove inline logs from http-stub page <a href="https://github.com/Uma-Tech/parrot/pull/58">#58</a></li>
+</ul>
+<h2><a class="header" href="#013" id="013">0.1.3</a></h2>
+<ul>
+<li>Translate into English the popup text <a href="https://github.com/Uma-Tech/parrot/pull/50">#50</a></li>
+<li>Limit the maximum number of query log entries <a href="https://github.com/Uma-Tech/parrot/pull/16">#16</a></li>
+<li>Add a request url to the stub edit page <a href="https://github.com/Uma-Tech/parrot/pull/35">#35</a></li>
+<li>Updates lots of dependencies (<a href="https://github.com/Uma-Tech/parrot/issues?q=milestone%3A0.1.3+label%3Adependencies">issues</a>)</li>
+</ul>
+<h2><a class="header" href="#012" id="012">0.1.2</a></h2>
+<ul>
+<li>Adds documentation <a href="https://github.com/Uma-Tech/parrot/pull/34">#34</a></li>
+<li>Updates lots of dependencies (<a href="https://github.com/Uma-Tech/parrot/issues?q=milestone%3A0.1.2+label%3Adependencies">issues</a>)</li>
+</ul>
+<h2><a class="header" href="#011" id="011">0.1.1</a></h2>
+<p>This is the first public version of the project. Happy Birthday Parrot!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="usage/response-templating.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="contributing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="usage/response-templating.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="contributing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
