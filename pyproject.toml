@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "kesha"
-version = "2.1.0"
+version = "2.2.0"
 description = "Service for testing http requests and webhooks."
 authors = ["Evgeniy <ea@lowit.ru>"]
 maintainers = ["Evgeniy Mitin <ea@lowit.ru>"]
