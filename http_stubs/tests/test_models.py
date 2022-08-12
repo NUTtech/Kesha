@@ -1,10 +1,10 @@
-from http_stubs.models import AbstractHTTPStub, AbstractLogEntry
+from http_stubs.models import HTTPStub, LogEntry
 
 
 class TestAbstractHTTPStub:
-    """Tests for AbstractHTTPStub class."""
+    """Tests for AbstractHTTPStub class through HTTPStub."""
 
-    model = AbstractHTTPStub(
+    model = HTTPStub(
         method='test_method',
         path='test_path',
     )
@@ -15,9 +15,9 @@ class TestAbstractHTTPStub:
 
 
 class TestAbstractLogEntry:
-    """Tests for AbstractHTTPStub class."""
+    """Tests for AbstractHTTPStub class through LogEntry."""
 
-    model = AbstractLogEntry()
+    model = LogEntry()
 
     def test_str(self):
         """Test magic method __str__."""
