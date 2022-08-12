@@ -89,6 +89,7 @@ celerybeat.pid
 
 # Environments
 .env
+.gen.env
 .venv
 env/
 venv/
@@ -119,3 +120,26 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# Git
+.git
+.gitignore
+
+# GitHub
+.github
+
+# Other
+docs
+.coveragerc
+.darglint
+.editorconfig
+.flake8
+.isort.cfg
+CHANGELOG.md
+**/tests
+conftest.py
+CONTRIBUTING.md
+Makefile
+pytest.ini
+README.md
+.dockerignore

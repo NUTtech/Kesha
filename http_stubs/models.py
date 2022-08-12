@@ -41,7 +41,7 @@ class AbstractHTTPStub(models.Model):
     )
     request_script = models.TextField(
         verbose_name='Request script',
-        help_text='Language: python 3.8. The script will run on each request.',
+        help_text='Language: python 3.10. The script will run on each request',
         blank=True,
     )
     enable_logging = models.BooleanField(

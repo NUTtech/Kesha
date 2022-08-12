@@ -42,7 +42,7 @@ class TestHTTPStubView:
         if method != HTTPMethod.HEAD.name:
             assert response.content == b'[]'
         assert response.status_code == HTTPStatus.OK
-        assert response._headers['content-type'][1] == 'application/json'
+        assert response.headers['content-type'] == 'application/json'
 
     @pytest.mark.freeze_time('2020-05-25')
     def test_write_log(self, http_stub_factory, client):
@@ -132,9 +132,9 @@ class TestHTTPStubView:
         if method != HTTPMethod.HEAD.name:
             assert response.content == resp_body.encode('utf-8')
         assert response.status_code == resp_status
-        assert response._headers['content-type'][1] == resp_content_type
+        assert response.headers['content-type'] == resp_content_type
         for header_name, header_value in resp_headers.items():
-            assert response._headers[header_name.lower()][1] == header_value
+            assert response.headers[header_name.lower()] == header_value
 
     @pytest.mark.parametrize(
         'regexp, path, status_code', (
@@ -236,7 +236,7 @@ class TestHTTPStubView:
 
         assert response.status_code == fake_response.status_code
         assert response.content == fake_response.content
-        assert response._headers['test_response_header'][1] == '1'
+        assert response.headers['test_response_header'] == '1'
 
         assert log.http_stub_id == stub.pk
         assert log.path == 'http://127.0.0.1/test_request_path'
@@ -276,7 +276,7 @@ class TestHTTPStubView:
 
         assert response.status_code == HTTPStatus.OK
         assert response.content == exp_string
-        assert response._headers['test'][1] == exp_string.decode()
+        assert response.headers['test'] == exp_string.decode()
 
 
 @pytest.mark.parametrize(
