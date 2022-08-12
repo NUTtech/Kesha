@@ -7,7 +7,7 @@
     ![](../images/request_script.jpg)
 
 ## About scripts
-Request scripts support a secure subset of Python version 3.8.  
+Request scripts support a secure subset of Python version 3.10.  
 Additionally, [json](https://docs.python.org/3/library/json.html) and [requests](https://requests.readthedocs.io/en/master/) modules are available to the script.  
 As well as a special variable that stores the request body `request_body`.  
 
