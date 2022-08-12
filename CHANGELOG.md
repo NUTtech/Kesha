@@ -1,6 +1,25 @@
 # Version history
 We follow [Semantic Versions](https://semver.org/).
 
+## 2.2.0 - Update dependencies
+
+### Updating dependencies
+- bump django from 3.1.14 to 4.1 [#226](https://github.com/NUTtech/Kesha/pull/226)
+- bump python from 3.8 to 3.10 [#225](https://github.com/NUTtech/Kesha/pull/225)
+- bump mypy from 0.950 to 0.971 [#212](https://github.com/NUTtech/Kesha/pull/212)
+- bump django-stubs from 1.9.0 to 1.12.0 [#202](https://github.com/NUTtech/Kesha/pull/202)
+- bump ipython from 8.3.0 to 8.4.0 [#192](https://github.com/NUTtech/Kesha/pull/192)
+- bump flake8-use-fstring from 1.3 to 1.4 [#217](https://github.com/NUTtech/Kesha/pull/217)
+- bump celery from 5.2.6 to 5.2.7 [#191](https://github.com/NUTtech/Kesha/pull/191)
+- bump django-simpleui from 2022.4.9 to 2022.7.29 [#216](https://github.com/NUTtech/Kesha/pull/216)
+- bump celery-types from 0.12.0 to 0.13.1 [#199](https://github.com/NUTtech/Kesha/pull/199)
+- bump requests from 2.27.1 to 2.28.1 [#208](https://github.com/NUTtech/Kesha/pull/208)
+- bump django-environ from 0.8.1 to 0.9.0 [#201](https://github.com/NUTtech/Kesha/pull/201)
+- bump uvicorn from 0.17.6 to 0.18.2 [#207](https://github.com/NUTtech/Kesha/pull/207)
+- bump django-stubs-ext from 0.4.0 to 0.5.0 [#203](https://github.com/NUTtech/Kesha/pull/203)
+- bump types-requests from 2.27.25 to 2.28.8 [#222](https://github.com/NUTtech/Kesha/pull/222)
+- bump flake8-django from 1.1.2 to 1.1.5 [#223](https://github.com/NUTtech/Kesha/pull/223)
+
 ## 2.1.0 - Update dependencies
 
 ### Minor changes
