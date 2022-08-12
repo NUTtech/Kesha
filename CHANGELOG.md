@@ -1,6 +1,11 @@
 # Version history
 We follow [Semantic Versions](https://semver.org/).
 
+## 2.2.1 - Fix docs
+
+### Minor changes
+- Fix docs [#227](https://github.com/NUTtech/Kesha/pull/227)
+
 ## 2.2.0 - Update dependencies
 
 ### Updating dependencies
